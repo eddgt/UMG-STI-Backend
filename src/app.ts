@@ -6,6 +6,7 @@ import indexRoutes from './routes/index.routes';
 import clienteRoutes from './routes/cliente.routes';
 import compraRoutes from './routes/compra.routes';
 import deliveryRoutes from './routes/delivery.routes';
+import mesaRoutes from './routes/mesa.routes';
 
 export class App {
 
@@ -37,6 +38,7 @@ export class App {
         this.app.use('/cliente', clienteRoutes);
         this.app.use('/compra', compraRoutes);
         this.app.use('/delivery', deliveryRoutes);
+        this.app.use('/mesa', mesaRoutes);
     }
 
 

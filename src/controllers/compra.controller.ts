@@ -20,15 +20,22 @@ class CompraController {
     }
 
     public async createCompra(req: Request, res: Response): Promise<Response> {
-        const newCompra: Compra = req.body;
-        //console.log(newCompra);
+        try {
+            const newCompra: Compra = req.body;
+            //console.log(newCompra);
 
-        const conne = await connect();
-        await conne.query('INSERT INTO compra SET ?', [newCompra]);
+            const conne = await connect();
+            await conne.query('INSERT INTO compra SET ?', [newCompra]);
 
-        return res.json({
-            message: 'Compra creado'
-        });
+            return res.json({
+                message: 'Compra creado'
+            });
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
+
     }
 
     public async Obtener(req: Request, res: Response): Promise<Response> {
@@ -44,27 +51,43 @@ class CompraController {
 
     public async Eliminar(req: Request, res: Response): Promise<Response> {
 
-        const id_delete = req.params.id;
-        const conne = await connect();
+        try {
+            const id_delete = req.params.id;
+            const conne = await connect();
 
-        await conne.query('DELETE FROM compra WHERE id = ? ', [id_delete]);
+            await conne.query('DELETE FROM compra WHERE id = ? ', [id_delete]);
 
-        return res.json({
-            message: 'Compra eliminada'
-        })
+            return res.json({
+                message: 'Compra eliminada'
+            })
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
+
+
     }
 
     public async Actualizar(req: Request, res: Response): Promise<Response> {
-        const id_delete = req.params.id;
-        const update: Compra = req.body;
+        try {
+            const id_delete = req.params.id;
+            const update: Compra = req.body;
 
-        const conne = await connect();
+            const conne = await connect();
 
-        await conne.query('UPDATE compra set ? WHERE id = ?', [update, id_delete])
+            await conne.query('UPDATE compra set ? WHERE id = ?', [update, id_delete])
 
-        return res.json({
-            message: 'Compra actualizada'
-        })
+            return res.json({
+                message: 'Compra actualizada'
+            })
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
+
+
     }
 }
 
