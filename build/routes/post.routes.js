@@ -8,7 +8,6 @@ class PostRoutes {
         this.config();
     }
     config() {
-        // this.router.get('/',postController.post)
         this.router.get('/', post_controller_1.postController.getPost);
         this.router.post('/', post_controller_1.postController.createPost);
         this.router.get('/:id', post_controller_1.postController.Obtener);

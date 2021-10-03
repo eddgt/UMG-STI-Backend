@@ -16,11 +16,15 @@ exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const index_routes_1 = __importDefault(require("./routes/index.routes"));
-// import postRoutes from './routes/post.routes';
 const cliente_routes_1 = __importDefault(require("./routes/cliente.routes"));
 const compra_routes_1 = __importDefault(require("./routes/compra.routes"));
 const delivery_routes_1 = __importDefault(require("./routes/delivery.routes"));
 const mesa_routes_1 = __importDefault(require("./routes/mesa.routes"));
+const detallecompra_routes_1 = __importDefault(require("./routes/detallecompra.routes"));
+const factura_routes_1 = __importDefault(require("./routes/factura.routes"));
+const inventario_routes_1 = __importDefault(require("./routes/inventario.routes"));
+const plato_routes_1 = __importDefault(require("./routes/plato.routes"));
+const tipopago_routes_1 = __importDefault(require("./routes/tipopago.routes"));
 class App {
     //port ? puede ser tipo numero o string (union type) pueden recibir o no
     constructor(port) {
@@ -41,11 +45,15 @@ class App {
     }
     routes() {
         this.app.use('/', index_routes_1.default);
-        // this.app.use('/post', postRoutes);
         this.app.use('/cliente', cliente_routes_1.default);
         this.app.use('/compra', compra_routes_1.default);
         this.app.use('/delivery', delivery_routes_1.default);
         this.app.use('/mesa', mesa_routes_1.default);
+        this.app.use('/detallecompra', detallecompra_routes_1.default);
+        this.app.use('/factura', factura_routes_1.default);
+        this.app.use('/inventario', inventario_routes_1.default);
+        this.app.use('/plato', plato_routes_1.default);
+        this.app.use('/tipopago', tipopago_routes_1.default);
     }
     /*  asyn await se usa para decir que va tomar un tiempo para ejecutar
         luego de eso muestra el mensaje

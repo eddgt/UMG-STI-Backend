@@ -8,7 +8,6 @@ class ClienteRoutes {
         this.config();
     }
     config() {
-        // this.router.get('/',clienteController.post)
         this.router.get('/', cliente_controller_1.clienteController.getCliente);
         this.router.post('/', cliente_controller_1.clienteController.createCliente);
         this.router.get('/:id', cliente_controller_1.clienteController.Obtener);

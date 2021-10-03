@@ -12,8 +12,7 @@ class CompraRoutes {
     }
 
 
-    config(): void {
-        // this.router.get('/',compraController.post)
+    config(): void {        
 
         this.router.get('/', compraController.getCompra);
 

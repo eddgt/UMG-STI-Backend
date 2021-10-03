@@ -12,8 +12,7 @@ class DeliveryRoutes {
     }
 
 
-    config(): void {
-        // this.router.get('/',deliveryController.post)
+    config(): void {        
 
         this.router.get('/', deliveryController.getDelivery);
 

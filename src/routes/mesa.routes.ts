@@ -12,8 +12,7 @@ class MesaRoutes {
     }
 
 
-    config(): void {
-        // this.router.get('/',mesaController.post)
+    config(): void {        
 
         this.router.get('/', mesaController.getMesa);
 

@@ -8,7 +8,6 @@ class CompraRoutes {
         this.config();
     }
     config() {
-        // this.router.get('/',compraController.post)
         this.router.get('/', compra_controller_1.compraController.getCompra);
         this.router.post('/', compra_controller_1.compraController.createCompra);
         this.router.get('/:id', compra_controller_1.compraController.Obtener);

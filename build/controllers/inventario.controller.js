@@ -1,0 +1,88 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.inventarioController = void 0;
+const database_1 = require("../database");
+class InventarioController {
+    inventario(req, res) {
+        res.json({
+            message: 'Inventario is start'
+        });
+    }
+    getInventario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const conne = yield database_1.connect();
+            const inventario = yield conne.query('SELECT * FROM inventario');
+            return res.json(inventario[0]);
+        });
+    }
+    createInventario(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const newInventario = req.body;
+                const conne = yield database_1.connect();
+                yield conne.query('INSERT INTO inventario SET ?', [newInventario]);
+                return res.json({
+                    message: 'Inventario creada'
+                });
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
+        });
+    }
+    Obtener(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id_inventario = req.params.id;
+            const conne = yield database_1.connect();
+            const inventario = yield conne.query('SELECT * FROM inventario WHERE id = ?', [id_inventario]);
+            return res.json(inventario[0]);
+        });
+    }
+    Eliminar(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id_delete = req.params.id;
+                const conne = yield database_1.connect();
+                yield conne.query('DELETE FROM inventario WHERE id = ? ', [id_delete]);
+                return res.json({
+                    message: 'Inventario eliminada'
+                });
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
+        });
+    }
+    Actualizar(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id_delete = req.params.id;
+                const update = req.body;
+                const conne = yield database_1.connect();
+                yield conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_delete]);
+                return res.json({
+                    message: 'Inventario actualizada'
+                });
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
+        });
+    }
+}
+exports.inventarioController = new InventarioController();

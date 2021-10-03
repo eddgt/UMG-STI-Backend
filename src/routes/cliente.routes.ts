@@ -12,8 +12,7 @@ class ClienteRoutes {
     }
 
 
-    config(): void {
-        // this.router.get('/',clienteController.post)
+    config(): void {        
 
         this.router.get('/', clienteController.getCliente);
 

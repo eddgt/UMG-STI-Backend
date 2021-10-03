@@ -2,11 +2,15 @@ import express, { Application } from 'express';
 import morgan from 'morgan';
 
 import indexRoutes from './routes/index.routes';
-// import postRoutes from './routes/post.routes';
 import clienteRoutes from './routes/cliente.routes';
 import compraRoutes from './routes/compra.routes';
 import deliveryRoutes from './routes/delivery.routes';
 import mesaRoutes from './routes/mesa.routes';
+import detalleCompraRoutes from './routes/detallecompra.routes';
+import facturaRoutes from './routes/factura.routes';
+import inventarioRoutes from './routes/inventario.routes';
+import platoRoutes from './routes/plato.routes';
+import tipopagoRoutes from './routes/tipopago.routes';
 
 export class App {
 
@@ -33,12 +37,16 @@ export class App {
     }
 
     routes(): void {
-        this.app.use('/', indexRoutes);
-        // this.app.use('/post', postRoutes);
+        this.app.use('/', indexRoutes);        
         this.app.use('/cliente', clienteRoutes);
         this.app.use('/compra', compraRoutes);
         this.app.use('/delivery', deliveryRoutes);
         this.app.use('/mesa', mesaRoutes);
+        this.app.use('/detallecompra', detalleCompraRoutes);
+        this.app.use('/factura', facturaRoutes);
+        this.app.use('/inventario', inventarioRoutes);
+        this.app.use('/plato', platoRoutes);
+        this.app.use('/tipopago', tipopagoRoutes);
     }
 
 

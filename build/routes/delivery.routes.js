@@ -8,7 +8,6 @@ class DeliveryRoutes {
         this.config();
     }
     config() {
-        // this.router.get('/',deliveryController.post)
         this.router.get('/', delivery_controller_1.deliveryController.getDelivery);
         this.router.post('/', delivery_controller_1.deliveryController.createDelivery);
         this.router.get('/:id', delivery_controller_1.deliveryController.Obtener);
