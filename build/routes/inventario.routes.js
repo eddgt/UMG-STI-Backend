@@ -4,7 +4,7 @@ const express_1 = require("express");
 const inventario_controller_1 = require("../controllers/inventario.controller");
 class InventarioRoutes {
     constructor() {
-        this.router = express_1.Router();
+        this.router = (0, express_1.Router)();
         this.config();
     }
     config() {

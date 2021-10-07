@@ -9,29 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.detalleCompraController = void 0;
+exports.empleadoController = void 0;
 const database_1 = require("../database");
-class DetalleCompraController {
-    detallecompra(req, res) {
+class EmpleadoController {
+    empleado(req, res) {
         res.json({
-            message: 'detalle compra is start'
+            message: 'Empleado is start'
         });
     }
-    getDetalleCompra(req, res) {
+    getEmpleado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
-            const detallecompra = yield conne.query('SELECT * FROM detalle_compra');
-            return res.json(detallecompra[0]);
+            const empleado = yield conne.query('SELECT * FROM employees');
+            return res.json(empleado[0]);
         });
     }
-    createDetalleCompra(req, res) {
+    createEmpleado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const newDetalleCompra = req.body;
+                const newEmpleado = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO detalle_compra SET ?', [newDetalleCompra]);
+                yield conne.query('INSERT INTO employees SET ?', [newEmpleado]);
                 return res.json({
-                    message: 'Detalle Compra creado'
+                    message: 'Empleado creado'
                 });
             }
             catch (error) {
@@ -43,10 +43,17 @@ class DetalleCompraController {
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_compra = req.params.id;
-            const conne = yield (0, database_1.connect)();
-            const detallecompra = yield conne.query('SELECT * FROM detalle_compra WHERE id = ?', [id_compra]);
-            return res.json(detallecompra[0]);
+            try {
+                const id_empleado = req.params.id;
+                const conne = yield (0, database_1.connect)();
+                const empleado = yield conne.query('SELECT * FROM employees WHERE id = ?', [id_empleado]);
+                return res.json(empleado[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     Eliminar(req, res) {
@@ -54,9 +61,9 @@ class DetalleCompraController {
             try {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('DELETE FROM detalle_compra WHERE id = ? ', [id_delete]);
+                yield conne.query('DELETE FROM employees WHERE id = ? ', [id_delete]);
                 return res.json({
-                    message: 'Detalle Compra eliminada'
+                    message: 'Empleado eliminado'
                 });
             }
             catch (error) {
@@ -69,12 +76,12 @@ class DetalleCompraController {
     Actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const id_delete = req.params.id;
+                const id_update = req.params.id;
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('UPDATE detalle_compra set ? WHERE id = ?', [update, id_delete]);
+                yield conne.query('UPDATE employees set ? WHERE id = ?', [update, id_update]);
                 return res.json({
-                    message: 'Detalle Compra actualizada'
+                    message: 'Empleado actualizado'
                 });
             }
             catch (error) {
@@ -85,4 +92,4 @@ class DetalleCompraController {
         });
     }
 }
-exports.detalleCompraController = new DetalleCompraController();
+exports.empleadoController = new EmpleadoController();

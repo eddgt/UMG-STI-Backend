@@ -22,14 +22,17 @@ const delivery_routes_1 = __importDefault(require("./routes/delivery.routes"));
 const mesa_routes_1 = __importDefault(require("./routes/mesa.routes"));
 const detallecompra_routes_1 = __importDefault(require("./routes/detallecompra.routes"));
 const factura_routes_1 = __importDefault(require("./routes/factura.routes"));
+const detallefactura_routes_1 = __importDefault(require("./routes/detallefactura.routes"));
 const inventario_routes_1 = __importDefault(require("./routes/inventario.routes"));
 const plato_routes_1 = __importDefault(require("./routes/plato.routes"));
 const tipopago_routes_1 = __importDefault(require("./routes/tipopago.routes"));
+const usuario_routes_1 = __importDefault(require("./routes/usuario.routes"));
+const empleado_routes_1 = __importDefault(require("./routes/empleado.routes"));
 class App {
     //port ? puede ser tipo numero o string (union type) pueden recibir o no
     constructor(port) {
         this.port = port;
-        this.app = express_1.default();
+        this.app = (0, express_1.default)();
         this.settings();
         this.middlewares();
         this.routes();
@@ -39,7 +42,7 @@ class App {
         this.app.set('port', this.port || process.env.PORT || 4000);
     }
     middlewares() {
-        this.app.use(morgan_1.default('dev'));
+        this.app.use((0, morgan_1.default)('dev'));
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
@@ -47,13 +50,16 @@ class App {
         this.app.use('/', index_routes_1.default);
         this.app.use('/cliente', cliente_routes_1.default);
         this.app.use('/compra', compra_routes_1.default);
+        this.app.use('/detallecompra', detallecompra_routes_1.default);
         this.app.use('/delivery', delivery_routes_1.default);
         this.app.use('/mesa', mesa_routes_1.default);
-        this.app.use('/detallecompra', detallecompra_routes_1.default);
         this.app.use('/factura', factura_routes_1.default);
+        this.app.use('/detallefactura', detallefactura_routes_1.default);
         this.app.use('/inventario', inventario_routes_1.default);
         this.app.use('/plato', plato_routes_1.default);
         this.app.use('/tipopago', tipopago_routes_1.default);
+        this.app.use('/usuario', usuario_routes_1.default);
+        this.app.use('/empleado', empleado_routes_1.default);
     }
     /*  asyn await se usa para decir que va tomar un tiempo para ejecutar
         luego de eso muestra el mensaje

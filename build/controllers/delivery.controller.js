@@ -19,9 +19,16 @@ class DeliveryController {
     }
     getDelivery(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
-            const delivery = yield conne.query('SELECT * FROM delivery');
-            return res.json(delivery[0]);
+            try {
+                const conne = yield (0, database_1.connect)();
+                const delivery = yield conne.query('SELECT * FROM delivery');
+                return res.json(delivery[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     createDelivery(req, res) {
@@ -29,7 +36,7 @@ class DeliveryController {
             try {
                 const newDelivery = req.body;
                 //console.log(newdelivery);
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO delivery SET ?', [newDelivery]);
                 return res.json({
                     message: 'Delivery creado'
@@ -44,17 +51,24 @@ class DeliveryController {
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_delivery = req.params.id;
-            const conne = yield database_1.connect();
-            const delivery = yield conne.query('SELECT * FROM delivery WHERE id = ?', [id_delivery]);
-            return res.json(delivery[0]);
+            try {
+                const id_delivery = req.params.id;
+                const conne = yield (0, database_1.connect)();
+                const delivery = yield conne.query('SELECT * FROM delivery WHERE id = ?', [id_delivery]);
+                return res.json(delivery[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     Eliminar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id_delete = req.params.id;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM delivery WHERE id = ? ', [id_delete]);
                 return res.json({
                     message: 'delivery eliminado'
@@ -72,7 +86,7 @@ class DeliveryController {
             try {
                 const id_delete = req.params.id;
                 const update = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE delivery set ? WHERE id = ?', [update, id_delete]);
                 return res.json({
                     message: 'delivery actualizado'

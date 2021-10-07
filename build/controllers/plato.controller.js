@@ -19,7 +19,7 @@ class PlatoController {
     }
     getPlato(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const plato = yield conne.query('SELECT * FROM plato');
             return res.json(plato[0]);
         });
@@ -29,7 +29,7 @@ class PlatoController {
             try {
                 const newPlato = req.body;
                 //console.log(newPlato);
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO plato SET ?', [newPlato]);
                 return res.json({
                     message: 'Plato creado'
@@ -45,7 +45,7 @@ class PlatoController {
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_plato = req.params.id;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const plato = yield conne.query('SELECT * FROM plato WHERE id = ?', [id_plato]);
             return res.json(plato[0]);
         });
@@ -54,7 +54,7 @@ class PlatoController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id_delete = req.params.id;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM plato WHERE id = ? ', [id_delete]);
                 return res.json({
                     message: 'Plato eliminado'
@@ -72,7 +72,7 @@ class PlatoController {
             try {
                 const id_plato = req.params.id;
                 const update = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE plato set ? WHERE id = ?', [update, id_plato]);
                 return res.json({
                     message: 'Plato actualizado'

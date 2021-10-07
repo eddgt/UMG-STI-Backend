@@ -19,9 +19,16 @@ class CompraController {
     }
     getCompra(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
-            const compra = yield conne.query('SELECT * FROM compra');
-            return res.json(compra[0]);
+            try {
+                const conne = yield (0, database_1.connect)();
+                const compra = yield conne.query('SELECT * FROM compra');
+                return res.json(compra[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     createCompra(req, res) {
@@ -29,7 +36,7 @@ class CompraController {
             try {
                 const newCompra = req.body;
                 //console.log(newCompra);
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO compra SET ?', [newCompra]);
                 return res.json({
                     message: 'Compra creado'
@@ -44,17 +51,24 @@ class CompraController {
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_compra = req.params.id;
-            const conne = yield database_1.connect();
-            const compra = yield conne.query('SELECT * FROM compra WHERE id = ?', [id_compra]);
-            return res.json(compra[0]);
+            try {
+                const id_compra = req.params.id;
+                const conne = yield (0, database_1.connect)();
+                const compra = yield conne.query('SELECT * FROM compra WHERE id = ?', [id_compra]);
+                return res.json(compra[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     Eliminar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id_delete = req.params.id;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM compra WHERE id = ? ', [id_delete]);
                 return res.json({
                     message: 'Compra eliminada'
@@ -72,7 +86,7 @@ class CompraController {
             try {
                 const id_delete = req.params.id;
                 const update = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE compra set ? WHERE id = ?', [update, id_delete]);
                 return res.json({
                     message: 'Compra actualizada'

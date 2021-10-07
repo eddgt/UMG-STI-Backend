@@ -19,7 +19,7 @@ class MesaController {
     }
     getMesa(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const mesa = yield conne.query('SELECT * FROM mesa');
             return res.json(mesa[0]);
         });
@@ -29,7 +29,7 @@ class MesaController {
             try {
                 const newMesa = req.body;
                 //console.log(newMesa);
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO mesa SET ?', [newMesa]);
                 return res.json({
                     message: 'Mesa creada'
@@ -45,7 +45,7 @@ class MesaController {
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_mesa = req.params.id;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const mesa = yield conne.query('SELECT * FROM mesa WHERE id = ?', [id_mesa]);
             return res.json(mesa[0]);
         });
@@ -54,7 +54,7 @@ class MesaController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id_delete = req.params.id;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM mesa WHERE id = ? ', [id_delete]);
                 return res.json({
                     message: 'Mesa eliminada'
@@ -72,7 +72,7 @@ class MesaController {
             try {
                 const id_delete = req.params.id;
                 const update = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE mesa set ? WHERE id = ?', [update, id_delete]);
                 return res.json({
                     message: 'Mesa actualizada'

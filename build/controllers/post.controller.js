@@ -19,7 +19,7 @@ class PostController {
     }
     getPost(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const post = yield conne.query('SELECT * FROM posts');
             return res.json(post[0]);
         });
@@ -28,7 +28,7 @@ class PostController {
         return __awaiter(this, void 0, void 0, function* () {
             const newPos = req.body;
             //console.log(newPos);
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             yield conne.query('INSERT INTO posts SET ?', [newPos]);
             return res.json({
                 text: 'publicacion creada'
@@ -38,7 +38,7 @@ class PostController {
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_post = req.params.id;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const post = yield conne.query('SELECT * FROM posts WHERE id = ?', [id_post]);
             return res.json(post[0]);
         });
@@ -46,7 +46,7 @@ class PostController {
     Eliminar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_delete = req.params.id;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             yield conne.query('DELETE FROM posts WHERE id = ? ', [id_delete]);
             return res.json({
                 texto: 'Publicacion eliminada'
@@ -57,7 +57,7 @@ class PostController {
         return __awaiter(this, void 0, void 0, function* () {
             const id_delete = req.params.id;
             const update = req.body;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             yield conne.query('UPDATE posts set ? WHERE id = ?', [update, id_delete]);
             return res.json({
                 message: 'post update'

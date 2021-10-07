@@ -19,49 +19,84 @@ class ClienteController {
     }
     getCliente(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
-            const cliente = yield conne.query('SELECT * FROM cliente');
-            return res.json(cliente[0]);
+            try {
+                const conne = yield (0, database_1.connect)();
+                const cliente = yield conne.query('SELECT * FROM cliente');
+                return res.json(cliente[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     createCliente(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newCliente = req.body;
-            //console.log(newCliente);
-            const conne = yield database_1.connect();
-            yield conne.query('INSERT INTO cliente SET ?', [newCliente]);
-            return res.json({
-                message: 'Cliente creado'
-            });
+            try {
+                const newCliente = req.body;
+                //console.log(newCliente);
+                const conne = yield (0, database_1.connect)();
+                yield conne.query('INSERT INTO cliente SET ?', [newCliente]);
+                return res.json({
+                    message: 'Cliente creado'
+                });
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_cliente = req.params.id;
-            const conne = yield database_1.connect();
-            const cliente = yield conne.query('SELECT * FROM cliente WHERE id = ?', [id_cliente]);
-            return res.json(cliente[0]);
+            try {
+                const id_cliente = req.params.id;
+                const conne = yield (0, database_1.connect)();
+                const cliente = yield conne.query('SELECT * FROM cliente WHERE id = ?', [id_cliente]);
+                return res.json(cliente[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     Eliminar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_delete = req.params.id;
-            const conne = yield database_1.connect();
-            yield conne.query('DELETE FROM cliente WHERE id = ? ', [id_delete]);
-            return res.json({
-                message: 'Cliente eliminado'
-            });
+            try {
+                const id_delete = req.params.id;
+                const conne = yield (0, database_1.connect)();
+                yield conne.query('DELETE FROM cliente WHERE id = ? ', [id_delete]);
+                return res.json({
+                    message: 'Cliente eliminado'
+                });
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     Actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_delete = req.params.id;
-            const update = req.body;
-            const conne = yield database_1.connect();
-            yield conne.query('UPDATE cliente set ? WHERE id = ?', [update, id_delete]);
-            return res.json({
-                message: 'cliente actualizado'
-            });
+            try {
+                const id_delete = req.params.id;
+                const update = req.body;
+                const conne = yield (0, database_1.connect)();
+                yield conne.query('UPDATE cliente set ? WHERE id = ?', [update, id_delete]);
+                return res.json({
+                    message: 'cliente actualizado'
+                });
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
 }

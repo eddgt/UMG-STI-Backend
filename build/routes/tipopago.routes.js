@@ -4,7 +4,7 @@ const express_1 = require("express");
 const tipopago_controller_1 = require("../controllers/tipopago.controller");
 class TipoPagoRoutes {
     constructor() {
-        this.router = express_1.Router();
+        this.router = (0, express_1.Router)();
         this.config();
     }
     config() {

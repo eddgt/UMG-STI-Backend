@@ -19,7 +19,7 @@ class FacturaController {
     }
     getFactura(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const factura = yield conne.query('SELECT * FROM factura');
             return res.json(factura[0]);
         });
@@ -28,7 +28,7 @@ class FacturaController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const newFactura = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO factura SET ?', [newFactura]);
                 return res.json({
                     message: 'Factura creada'
@@ -44,7 +44,7 @@ class FacturaController {
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_factura = req.params.id;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const factura = yield conne.query('SELECT * FROM factura WHERE id = ?', [id_factura]);
             return res.json(factura[0]);
         });
@@ -53,7 +53,7 @@ class FacturaController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id_delete = req.params.id;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM factura WHERE id = ? ', [id_delete]);
                 return res.json({
                     message: 'Factura eliminada'
@@ -71,7 +71,7 @@ class FacturaController {
             try {
                 const id_delete = req.params.id;
                 const update = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE factura set ? WHERE id = ?', [update, id_delete]);
                 return res.json({
                     message: 'Factura actualizada'

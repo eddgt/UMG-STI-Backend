@@ -13,7 +13,7 @@ exports.connect = void 0;
 const promise_1 = require("mysql2/promise");
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
-        const connection = yield promise_1.createPool({
+        const connection = yield (0, promise_1.createPool)({
             host: 'seminario.cgres1bnzqkw.us-east-2.rds.amazonaws.com',
             user: 'adminW',
             password: '1234will1',

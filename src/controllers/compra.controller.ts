@@ -13,10 +13,16 @@ class CompraController {
     }
 
     public async getCompra(req: Request, res: Response): Promise<Response> {
-        const conne = await connect();
+        try {
+            const conne = await connect();
 
-        const compra = await conne.query('SELECT * FROM compra');
-        return res.json(compra[0]);
+            const compra = await conne.query('SELECT * FROM compra');
+            return res.json(compra[0]);
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
     }
 
     public async createCompra(req: Request, res: Response): Promise<Response> {
@@ -40,13 +46,19 @@ class CompraController {
 
     public async Obtener(req: Request, res: Response): Promise<Response> {
 
-        const id_compra = req.params.id;
+        try {
+            const id_compra = req.params.id;
 
-        const conne = await connect();
+            const conne = await connect();
 
-        const compra = await conne.query('SELECT * FROM compra WHERE id = ?', [id_compra]);
+            const compra = await conne.query('SELECT * FROM compra WHERE id = ?', [id_compra]);
 
-        return res.json(compra[0]);
+            return res.json(compra[0]);
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
     }
 
     public async Eliminar(req: Request, res: Response): Promise<Response> {

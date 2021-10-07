@@ -13,10 +13,16 @@ class DeliveryController {
     }
 
     public async getDelivery(req: Request, res: Response): Promise<Response> {
-        const conne = await connect();
+        try {
+            const conne = await connect();
 
-        const delivery = await conne.query('SELECT * FROM delivery');
-        return res.json(delivery[0]);
+            const delivery = await conne.query('SELECT * FROM delivery');
+            return res.json(delivery[0]);
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
     }
 
     public async createDelivery(req: Request, res: Response): Promise<Response> {
@@ -39,14 +45,19 @@ class DeliveryController {
     }
 
     public async Obtener(req: Request, res: Response): Promise<Response> {
+        try {
+            const id_delivery = req.params.id;
 
-        const id_delivery = req.params.id;
+            const conne = await connect();
 
-        const conne = await connect();
+            const delivery = await conne.query('SELECT * FROM delivery WHERE id = ?', [id_delivery]);
 
-        const delivery = await conne.query('SELECT * FROM delivery WHERE id = ?', [id_delivery]);
-
-        return res.json(delivery[0]);
+            return res.json(delivery[0]);
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
     }
 
     public async Eliminar(req: Request, res: Response): Promise<Response> {

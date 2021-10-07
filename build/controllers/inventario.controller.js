@@ -19,7 +19,7 @@ class InventarioController {
     }
     getInventario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const inventario = yield conne.query('SELECT * FROM inventario');
             return res.json(inventario[0]);
         });
@@ -28,7 +28,7 @@ class InventarioController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const newInventario = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO inventario SET ?', [newInventario]);
                 return res.json({
                     message: 'Inventario creada'
@@ -44,7 +44,7 @@ class InventarioController {
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_inventario = req.params.id;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const inventario = yield conne.query('SELECT * FROM inventario WHERE id = ?', [id_inventario]);
             return res.json(inventario[0]);
         });
@@ -53,7 +53,7 @@ class InventarioController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id_delete = req.params.id;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM inventario WHERE id = ? ', [id_delete]);
                 return res.json({
                     message: 'Inventario eliminada'
@@ -71,7 +71,7 @@ class InventarioController {
             try {
                 const id_delete = req.params.id;
                 const update = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_delete]);
                 return res.json({
                     message: 'Inventario actualizada'

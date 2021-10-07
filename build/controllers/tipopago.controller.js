@@ -19,7 +19,7 @@ class TipoPagoController {
     }
     getTipoPago(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const tipopago = yield conne.query('SELECT * FROM tipo_pago');
             return res.json(tipopago[0]);
         });
@@ -29,7 +29,7 @@ class TipoPagoController {
             try {
                 const newTipoPago = req.body;
                 //console.log(newTipoPago);
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO tipo_pago SET ?', [newTipoPago]);
                 return res.json({
                     message: 'TipoPago creado'
@@ -45,7 +45,7 @@ class TipoPagoController {
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_tipopago = req.params.id;
-            const conne = yield database_1.connect();
+            const conne = yield (0, database_1.connect)();
             const tipopago = yield conne.query('SELECT * FROM tipo_pago WHERE id = ?', [id_tipopago]);
             return res.json(tipopago[0]);
         });
@@ -54,7 +54,7 @@ class TipoPagoController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id_delete = req.params.id;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM tipo_pago WHERE id = ? ', [id_delete]);
                 return res.json({
                     message: 'tipopago eliminado'
@@ -72,7 +72,7 @@ class TipoPagoController {
             try {
                 const id_tipopago = req.params.id;
                 const update = req.body;
-                const conne = yield database_1.connect();
+                const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE tipo_pago set ? WHERE id = ?', [update, id_tipopago]);
                 return res.json({
                     message: 'tipopago actualizado'

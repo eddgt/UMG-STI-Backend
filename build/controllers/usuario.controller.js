@@ -9,29 +9,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.detalleCompraController = void 0;
+exports.usuarioController = void 0;
 const database_1 = require("../database");
-class DetalleCompraController {
-    detallecompra(req, res) {
+class UsuarioController {
+    usuario(req, res) {
         res.json({
-            message: 'detalle compra is start'
+            message: 'usuario is start'
         });
     }
-    getDetalleCompra(req, res) {
+    getUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
-            const detallecompra = yield conne.query('SELECT * FROM detalle_compra');
-            return res.json(detallecompra[0]);
+            const usuario = yield conne.query('SELECT * FROM Usuarios');
+            return res.json(usuario[0]);
         });
     }
-    createDetalleCompra(req, res) {
+    createUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const newDetalleCompra = req.body;
+                const newUsuario = req.body;
+                //console.log(newUsuario);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO detalle_compra SET ?', [newDetalleCompra]);
+                yield conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
                 return res.json({
-                    message: 'Detalle Compra creado'
+                    message: 'Usuario creado'
                 });
             }
             catch (error) {
@@ -43,10 +44,10 @@ class DetalleCompraController {
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_compra = req.params.id;
+            const id_usuario = req.params.id;
             const conne = yield (0, database_1.connect)();
-            const detallecompra = yield conne.query('SELECT * FROM detalle_compra WHERE id = ?', [id_compra]);
-            return res.json(detallecompra[0]);
+            const usuario = yield conne.query('SELECT * FROM Usuarios WHERE id = ?', [id_usuario]);
+            return res.json(usuario[0]);
         });
     }
     Eliminar(req, res) {
@@ -54,9 +55,9 @@ class DetalleCompraController {
             try {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('DELETE FROM detalle_compra WHERE id = ? ', [id_delete]);
+                yield conne.query('DELETE FROM Usuarios WHERE id = ? ', [id_delete]);
                 return res.json({
-                    message: 'Detalle Compra eliminada'
+                    message: 'usuario eliminado'
                 });
             }
             catch (error) {
@@ -72,9 +73,9 @@ class DetalleCompraController {
                 const id_delete = req.params.id;
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('UPDATE detalle_compra set ? WHERE id = ?', [update, id_delete]);
+                yield conne.query('UPDATE Usuarios set ? WHERE id = ?', [update, id_delete]);
                 return res.json({
-                    message: 'Detalle Compra actualizada'
+                    message: 'Usuario actualizado'
                 });
             }
             catch (error) {
@@ -85,4 +86,4 @@ class DetalleCompraController {
         });
     }
 }
-exports.detalleCompraController = new DetalleCompraController();
+exports.usuarioController = new UsuarioController();
