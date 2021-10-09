@@ -9,30 +9,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.usuarioController = void 0;
+exports.compraController = void 0;
 const database_1 = require("../database");
-class UsuarioController {
-    usuario(req, res) {
+class CompraController {
+    compra(req, res) {
         res.json({
-            message: 'usuario is start'
+            message: 'compra is start'
         });
     }
-    getUsuario(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const conne = yield (0, database_1.connect)();
-            const usuario = yield conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios');
-            return res.json(usuario[0]);
-        });
-    }
-    createUsuario(req, res) {
+    getCompra(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const newUsuario = req.body;
-                //console.log(newUsuario);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
+                const compra = yield conne.query('SELECT * FROM compra');
+                return res.json(compra[0]);
+            }
+            catch (error) {
                 return res.json({
-                    message: 'Usuario creado'
+                    message: error
+                });
+            }
+        });
+    }
+    createCompra(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const newCompra = req.body;
+                //console.log(newCompra);
+                const conne = yield (0, database_1.connect)();
+                yield conne.query('INSERT INTO compra SET ?', [newCompra]);
+                return res.json({
+                    message: 'Compra creado'
                 });
             }
             catch (error) {
@@ -44,10 +51,17 @@ class UsuarioController {
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_usuario = req.params.id;
-            const conne = yield (0, database_1.connect)();
-            const usuario = yield conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios WHERE id = ?', [id_usuario]);
-            return res.json(usuario[0]);
+            try {
+                const id_compra = req.params.id;
+                const conne = yield (0, database_1.connect)();
+                const compra = yield conne.query('SELECT * FROM compra WHERE id = ?', [id_compra]);
+                return res.json(compra[0]);
+            }
+            catch (error) {
+                return res.json({
+                    message: error
+                });
+            }
         });
     }
     Eliminar(req, res) {
@@ -55,9 +69,9 @@ class UsuarioController {
             try {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('DELETE FROM Usuarios WHERE id = ? ', [id_delete]);
+                yield conne.query('DELETE FROM compra WHERE id = ? ', [id_delete]);
                 return res.json({
-                    message: 'usuario eliminado'
+                    message: 'Compra eliminada'
                 });
             }
             catch (error) {
@@ -73,9 +87,9 @@ class UsuarioController {
                 const id_delete = req.params.id;
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('UPDATE Usuarios set ? WHERE id = ?', [update, id_delete]);
+                yield conne.query('UPDATE compra set ? WHERE id = ?', [update, id_delete]);
                 return res.json({
-                    message: 'Usuario actualizado'
+                    message: 'Compra actualizada'
                 });
             }
             catch (error) {
@@ -86,4 +100,4 @@ class UsuarioController {
         });
     }
 }
-exports.usuarioController = new UsuarioController();
+exports.compraController = new CompraController();

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
+const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const index_routes_1 = __importDefault(require("./routes/index.routes"));
@@ -28,21 +29,28 @@ const plato_routes_1 = __importDefault(require("./routes/plato.routes"));
 const tipopago_routes_1 = __importDefault(require("./routes/tipopago.routes"));
 const usuario_routes_1 = __importDefault(require("./routes/usuario.routes"));
 const empleado_routes_1 = __importDefault(require("./routes/empleado.routes"));
+const login_routes_1 = __importDefault(require("./routes/login.routes"));
 class App {
     //port ? puede ser tipo numero o string (union type) pueden recibir o no
     constructor(port) {
         this.port = port;
         this.app = (0, express_1.default)();
+        const options = {
+            origin: '*'
+        };
+        // Then pass these options to cors:
+        this.app.use((0, cors_1.default)(options));
         this.settings();
         this.middlewares();
         this.routes();
     }
     // setea puerto en port
     settings() {
-        this.app.set('port', this.port || process.env.PORT || 4000);
+        this.app.set('port', this.port || process.env.PORT || 4004);
     }
     middlewares() {
         this.app.use((0, morgan_1.default)('dev'));
+        this.app.use((0, cors_1.default)());
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
@@ -60,6 +68,7 @@ class App {
         this.app.use('/tipopago', tipopago_routes_1.default);
         this.app.use('/usuario', usuario_routes_1.default);
         this.app.use('/empleado', empleado_routes_1.default);
+        this.app.use('/login', login_routes_1.default);
     }
     /*  asyn await se usa para decir que va tomar un tiempo para ejecutar
         luego de eso muestra el mensaje

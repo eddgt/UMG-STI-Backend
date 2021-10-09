@@ -15,6 +15,7 @@ import platoRoutes from './routes/plato.routes';
 import tipopagoRoutes from './routes/tipopago.routes';
 import usuarioRoutes from './routes/usuario.routes';
 import empleadoRoutes from './routes/empleado.routes';
+import loginRoutes from './routes/login.routes';
 
 
 export class App {
@@ -25,12 +26,9 @@ export class App {
     constructor(private port?: number | string) {
 
         this.app = express();
-        this.app.use(cors);
-        // add localhost to valid origins
-        const allowedOrigins = ['http://localhost:4200'];
 
         const options: cors.CorsOptions = {
-            origin: allowedOrigins
+            origin: '*'
         };
 
         // Then pass these options to cors:
@@ -43,11 +41,12 @@ export class App {
 
     // setea puerto en port
     settings() {
-        this.app.set('port', this.port || process.env.PORT || 4000);
+        this.app.set('port', this.port || process.env.PORT || 4004);
     }
 
     middlewares() {
         this.app.use(morgan('dev'))
+        this.app.use(cors());
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: false }))
     }
@@ -66,6 +65,7 @@ export class App {
         this.app.use('/tipopago', tipopagoRoutes);
         this.app.use('/usuario', usuarioRoutes);
         this.app.use('/empleado', empleadoRoutes);
+        this.app.use('/login', loginRoutes);
     }
 
 

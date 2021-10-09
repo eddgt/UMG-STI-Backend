@@ -15,7 +15,7 @@ class UsuarioController {
     public async getUsuario(req: Request, res: Response): Promise<Response> {
         const conne = await connect();
 
-        const usuario = await conne.query('SELECT * FROM Usuarios');
+        const usuario = await conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios');
         return res.json(usuario[0]);
     }
 
@@ -43,7 +43,7 @@ class UsuarioController {
 
         const conne = await connect();
 
-        const usuario = await conne.query('SELECT * FROM Usuarios WHERE id = ?', [id_usuario]);
+        const usuario = await conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios WHERE id = ?', [id_usuario]);
 
         return res.json(usuario[0]);
     }
