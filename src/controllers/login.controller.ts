@@ -19,7 +19,7 @@ class LoginController {
 
             const conne = await connect();
 
-            const login = await conne.query('SELECT usuario, nombre, email FROM Usuarios WHERE email = ? and pass = ?', [newLogin.email, newLogin.pass]);
+            const login = await conne.query('SELECT usuario, rol, nombre, email FROM Usuarios WHERE email = ? and pass = ?', [newLogin.email, newLogin.pass]);
             console.log("begin auntenticar result -> " + JSON.stringify(login[0]));
             const resultObj = JSON.stringify(login[0])
             console.log("resultObj -> " + JSON.stringify(login[0]));

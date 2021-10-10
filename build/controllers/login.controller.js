@@ -23,7 +23,7 @@ class LoginController {
             try {
                 const newLogin = req.body;
                 const conne = yield (0, database_1.connect)();
-                const login = yield conne.query('SELECT usuario, nombre, email FROM Usuarios WHERE email = ? and pass = ?', [newLogin.email, newLogin.pass]);
+                const login = yield conne.query('SELECT usuario, rol, nombre, email FROM Usuarios WHERE email = ? and pass = ?', [newLogin.email, newLogin.pass]);
                 console.log("begin auntenticar result -> " + JSON.stringify(login[0]));
                 const resultObj = JSON.stringify(login[0]);
                 console.log("resultObj -> " + JSON.stringify(login[0]));
