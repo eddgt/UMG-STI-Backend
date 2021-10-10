@@ -9,6 +9,7 @@ class LoginRoutes {
     }
     config() {
         this.router.post('/', login_controller_1.loginController.loginAuth);
+        console.log("begin router...");
     }
 }
 const loginRoutes = new LoginRoutes();

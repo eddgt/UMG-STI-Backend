@@ -12,8 +12,7 @@ class LoginRoutes {
 
     config(): void {
 
-        this.router.post('/', loginController.loginAuth)
-        console.log("begin router...");
+        this.router.post('/', loginController.loginAuth)        
 
     }
 

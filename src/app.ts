@@ -16,6 +16,7 @@ import tipopagoRoutes from './routes/tipopago.routes';
 import usuarioRoutes from './routes/usuario.routes';
 import empleadoRoutes from './routes/empleado.routes';
 import loginRoutes from './routes/login.routes';
+import passwordRoutes from './routes/password.routes';
 
 
 export class App {
@@ -66,6 +67,7 @@ export class App {
         this.app.use('/usuario', usuarioRoutes);
         this.app.use('/empleado', empleadoRoutes);
         this.app.use('/login', loginRoutes);
+        this.app.use('/password', passwordRoutes);
     }
 
 
