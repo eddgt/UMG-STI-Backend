@@ -31,6 +31,7 @@ const usuario_routes_1 = __importDefault(require("./routes/usuario.routes"));
 const empleado_routes_1 = __importDefault(require("./routes/empleado.routes"));
 const login_routes_1 = __importDefault(require("./routes/login.routes"));
 const password_routes_1 = __importDefault(require("./routes/password.routes"));
+const reporteventas_routes_1 = __importDefault(require("./routes/reporteventas.routes"));
 class App {
     //port ? puede ser tipo numero o string (union type) pueden recibir o no
     constructor(port) {
@@ -71,6 +72,7 @@ class App {
         this.app.use('/empleado', empleado_routes_1.default);
         this.app.use('/login', login_routes_1.default);
         this.app.use('/password', password_routes_1.default);
+        this.app.use('/reporteventas', reporteventas_routes_1.default);
     }
     /*  asyn await se usa para decir que va tomar un tiempo para ejecutar
         luego de eso muestra el mensaje
