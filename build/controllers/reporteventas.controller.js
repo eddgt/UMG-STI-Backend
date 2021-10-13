@@ -23,14 +23,14 @@ class ReporteVentasController {
             const inicio = req.body.desde;
             const fin = req.body.hasta;
             const conne = yield (0, database_1.connect)();
-            const reporte = yield conne.query('SELECT a.mesa_id mesa, ' +
-                'b.cantidad, a.delivery_id delivery, ' +
-                'a.date_fact fecha , b.precio_id ' +
+            const reporte = yield conne.query('SELECT DATE_FORMAT(a.date_fact, "%Y-%m-%d") fecha, ' +
+                'a.delivery_id canal, c.descripcion producto, sum(b.cantidad) cantidad, round(sum(c.precio),2) total ' +
                 'FROM factura a ' +
                 'inner join fact_detalle b on a.id = b.factura_id ' +
+                'inner join plato c on c.id = b.plato_id ' +
                 'where a.date_fact between ? and ? ' +
-                'order by 1', [inicio, fin]);
-            console.log(' ' + inicio + ' ' + fin + ' ' + reporte);
+                ' group by a.date_fact, b.cantidad, c.descripcion, c.precio, a.delivery_id', [inicio, fin]);
+            // console.log(' ' + inicio + ' ' + fin + ' ' + reporte)
             return res.json(reporte[0]);
         });
     }
