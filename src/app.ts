@@ -18,6 +18,8 @@ import empleadoRoutes from './routes/empleado.routes';
 import loginRoutes from './routes/login.routes';
 import passwordRoutes from './routes/password.routes';
 import reporteventasRoutes from './routes/reporteventas.routes';
+import reportecomisionesRoutes from './routes/reportecomisiones.routes';
+import reporteinventarioRoutes from './routes/reporteinventario.routes';
 
 
 export class App {
@@ -70,6 +72,8 @@ export class App {
         this.app.use('/login', loginRoutes);
         this.app.use('/password', passwordRoutes);
         this.app.use('/reporteventas', reporteventasRoutes);
+        this.app.use('/reportecomisiones', reportecomisionesRoutes);
+        this.app.use('/reporteinventario', reporteinventarioRoutes);
     }
 
 
