@@ -30,9 +30,10 @@ class TipoPagoController {
                 const newTipoPago = req.body;
                 //console.log(newTipoPago);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO tipo_pago SET ?', [newTipoPago]);
+                const result = yield conne.query('INSERT INTO tipo_pago SET ?', [newTipoPago]);
                 return res.json({
-                    message: 'TipoPago creado'
+                    message: 'TipoPago creado',
+                    id: result[0].insertId
                 });
             }
             catch (error) {

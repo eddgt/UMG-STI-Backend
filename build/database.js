@@ -14,12 +14,20 @@ const promise_1 = require("mysql2/promise");
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
         const connection = yield (0, promise_1.createPool)({
-            host: 'seminario.cgres1bnzqkw.us-east-2.rds.amazonaws.com',
-            user: 'adminW',
-            password: '1234will1',
-            database: 'BDRROSHI',
+            host: 'db-oishiramen.cwjyed1vzrxl.us-east-2.rds.amazonaws.com',
+            user: 'adminOish',
+            password: '123Oishi*',
+            database: 'BDRROISHI',
             connectionLimit: 10
         });
+        /*
+            const connection = await createPool({
+                host: 'seminario.cgres1bnzqkw.us-east-2.rds.amazonaws.com',
+                user: 'adminW',
+                password: '1234will1',
+                database: 'BDRROSHI',
+                connectionLimit: 10
+            }); */
         return connection;
     });
 }

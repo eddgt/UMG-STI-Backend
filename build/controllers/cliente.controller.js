@@ -37,9 +37,10 @@ class ClienteController {
                 const newCliente = req.body;
                 //console.log(newCliente);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO cliente SET ?', [newCliente]);
+                const result = yield conne.query('INSERT INTO cliente SET ?', [newCliente]);
                 return res.json({
-                    message: 'Cliente creado'
+                    message: 'Cliente creado',
+                    id: result[0].insertId
                 });
             }
             catch (error) {

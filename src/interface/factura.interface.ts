@@ -3,7 +3,7 @@ export interface Factura {
     mesa_id?: number;
     delivery_id?: number;
     cliente_id?: number;
-    Usuario_id?: number;
+    Usuarios_id?: number;
     date_fact: string;
-    tipo_pago: string;
+    tipo_pago_id: string;
 }

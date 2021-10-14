@@ -21,13 +21,14 @@ class FacturaController {
 
     public async createFactura(req: Request, res: Response): Promise<Response> {
         try {
-            const newFactura: Factura = req.body;            
+            const newFactura: Factura = req.body;
 
             const conne = await connect();
-            await conne.query('INSERT INTO factura SET ?', [newFactura]);
+            const result = await conne.query('INSERT INTO factura SET ?', [newFactura]);
 
             return res.json({
-                message: 'Factura creada'
+                message: 'Factura creada',
+                id: result[0].insertId
             });
 
         } catch (error) {

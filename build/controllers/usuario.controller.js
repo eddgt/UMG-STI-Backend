@@ -30,7 +30,8 @@ class UsuarioController {
                 const newUsuario = req.body;
                 //console.log(newUsuario);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
+                const result = yield conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
+                console.log(result);
                 return res.json({
                     message: 'Usuario creado'
                 });

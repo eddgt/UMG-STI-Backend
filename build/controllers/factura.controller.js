@@ -29,9 +29,10 @@ class FacturaController {
             try {
                 const newFactura = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO factura SET ?', [newFactura]);
+                const result = yield conne.query('INSERT INTO factura SET ?', [newFactura]);
                 return res.json({
-                    message: 'Factura creada'
+                    message: 'Factura creada',
+                    id: result[0].insertId
                 });
             }
             catch (error) {

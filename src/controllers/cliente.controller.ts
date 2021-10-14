@@ -32,10 +32,11 @@ class ClienteController {
             //console.log(newCliente);
 
             const conne = await connect();
-            await conne.query('INSERT INTO cliente SET ?', [newCliente]);
+            const result = await conne.query('INSERT INTO cliente SET ?', [newCliente]);
 
             return res.json({
-                message: 'Cliente creado'
+                message: 'Cliente creado',
+                id: result[0].insertId
             });
         } catch (error) {
             return res.json({

@@ -1,5 +1,4 @@
-export interface CajaChica {
-    id?: number;
+export interface CajaChica {    
     Usuarios_id?: number;
     caja_descripcion?: string;
     fecha_apertura?: Date;

@@ -29,9 +29,10 @@ class CajaChicaController {
             try {
                 const newCajaChica = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO caja_chica SET ?', [newCajaChica]);
+                const result = yield conne.query('INSERT INTO caja_chica SET ?', [newCajaChica]);
                 return res.json({
-                    message: 'Caja Chica creada'
+                    message: 'Caja Chica creada',
+                    id: result[0].insertId
                 });
             }
             catch (error) {

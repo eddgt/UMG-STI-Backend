@@ -24,10 +24,11 @@ class CajaChicaController {
             const newCajaChica: CajaChica = req.body;
 
             const conne = await connect();
-            await conne.query('INSERT INTO caja_chica SET ?', [newCajaChica]);
+            const result = await conne.query('INSERT INTO caja_chica SET ?', [newCajaChica]);
 
             return res.json({
-                message: 'Caja Chica creada'
+                message: 'Caja Chica creada',
+                id: result[0].insertId
             });
 
         } catch (error) {

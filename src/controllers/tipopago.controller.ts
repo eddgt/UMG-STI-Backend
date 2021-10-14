@@ -25,10 +25,11 @@ class TipoPagoController {
             //console.log(newTipoPago);
 
             const conne = await connect();
-            await conne.query('INSERT INTO tipo_pago SET ?', [newTipoPago]);
+            const result = await conne.query('INSERT INTO tipo_pago SET ?', [newTipoPago]);
 
             return res.json({
-                message: 'TipoPago creado'
+                message: 'TipoPago creado',
+                id: result[0].insertId
             });
 
         } catch (error) {

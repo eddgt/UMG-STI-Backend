@@ -25,8 +25,8 @@ class UsuarioController {
             //console.log(newUsuario);
 
             const conne = await connect();
-            await conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
-
+            const result = await conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
+            console.log(result);
             return res.json({
                 message: 'Usuario creado'
             });
