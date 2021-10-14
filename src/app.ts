@@ -20,6 +20,7 @@ import passwordRoutes from './routes/password.routes';
 import reporteventasRoutes from './routes/reporteventas.routes';
 import reportecomisionesRoutes from './routes/reportecomisiones.routes';
 import reporteinventarioRoutes from './routes/reporteinventario.routes';
+import cajachicaRoutes from './routes/cajachica.routes';
 
 
 export class App {
@@ -71,6 +72,7 @@ export class App {
         this.app.use('/empleado', empleadoRoutes);
         this.app.use('/login', loginRoutes);
         this.app.use('/password', passwordRoutes);
+        this.app.use('/cajachica', cajachicaRoutes);
         this.app.use('/reporteventas', reporteventasRoutes);
         this.app.use('/reportecomisiones', reportecomisionesRoutes);
         this.app.use('/reporteinventario', reporteinventarioRoutes);

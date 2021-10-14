@@ -9,29 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inventarioController = void 0;
+exports.cajachicaController = void 0;
 const database_1 = require("../database");
-class InventarioController {
-    inventario(req, res) {
+class CajaChicaController {
+    cajachica(req, res) {
         res.json({
-            message: 'Inventario is start'
+            message: 'Caja Chica is start'
         });
     }
-    getInventario(req, res) {
+    getCajaChica(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
-            const inventario = yield conne.query('SELECT * FROM inventario');
-            return res.json(inventario[0]);
+            const cajachica = yield conne.query('SELECT * FROM caja_chica');
+            return res.json(cajachica[0]);
         });
     }
-    createInventario(req, res) {
+    createCajaChica(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const newInventario = req.body;
+                const newCajaChica = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO inventario SET ?', [newInventario]);
+                yield conne.query('INSERT INTO caja_chica SET ?', [newCajaChica]);
                 return res.json({
-                    message: 'Inventario creado'
+                    message: 'Caja Chica creada'
                 });
             }
             catch (error) {
@@ -43,10 +43,10 @@ class InventarioController {
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_inventario = req.params.id;
+            const id_caja = req.params.id;
             const conne = yield (0, database_1.connect)();
-            const inventario = yield conne.query('SELECT * FROM inventario WHERE id = ?', [id_inventario]);
-            return res.json(inventario[0]);
+            const cajachica = yield conne.query('SELECT * FROM caja_chica WHERE id = ?', [id_caja]);
+            return res.json(cajachica[0]);
         });
     }
     Eliminar(req, res) {
@@ -54,9 +54,9 @@ class InventarioController {
             try {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('DELETE FROM inventario WHERE id = ? ', [id_delete]);
+                yield conne.query('DELETE FROM caja_chica WHERE id = ? ', [id_delete]);
                 return res.json({
-                    message: 'Inventario eliminado'
+                    message: 'Caja Chija eliminada'
                 });
             }
             catch (error) {
@@ -69,12 +69,12 @@ class InventarioController {
     Actualizar(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const id_delete = req.params.id;
+                const id_update = req.params.id;
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_delete]);
+                yield conne.query('UPDATE caja_chica set ? WHERE id = ?', [update, id_update]);
                 return res.json({
-                    message: 'Inventario actualizado'
+                    message: 'Caja Chica actualizada'
                 });
             }
             catch (error) {
@@ -85,4 +85,4 @@ class InventarioController {
         });
     }
 }
-exports.inventarioController = new InventarioController();
+exports.cajachicaController = new CajaChicaController();

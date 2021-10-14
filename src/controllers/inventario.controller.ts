@@ -27,7 +27,7 @@ class InventarioController {
             await conne.query('INSERT INTO inventario SET ?', [newInventario]);
 
             return res.json({
-                message: 'Inventario creada'
+                message: 'Inventario creado'
             });
 
         } catch (error) {
@@ -58,7 +58,7 @@ class InventarioController {
             await conne.query('DELETE FROM inventario WHERE id = ? ', [id_delete]);
 
             return res.json({
-                message: 'Inventario eliminada'
+                message: 'Inventario eliminado'
             })
         } catch (error) {
             return res.json({
@@ -79,7 +79,7 @@ class InventarioController {
             await conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_delete])
 
             return res.json({
-                message: 'Inventario actualizada'
+                message: 'Inventario actualizado'
             })
         } catch (error) {
             return res.json({

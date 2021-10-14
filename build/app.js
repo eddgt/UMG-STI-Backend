@@ -34,6 +34,7 @@ const password_routes_1 = __importDefault(require("./routes/password.routes"));
 const reporteventas_routes_1 = __importDefault(require("./routes/reporteventas.routes"));
 const reportecomisiones_routes_1 = __importDefault(require("./routes/reportecomisiones.routes"));
 const reporteinventario_routes_1 = __importDefault(require("./routes/reporteinventario.routes"));
+const cajachica_routes_1 = __importDefault(require("./routes/cajachica.routes"));
 class App {
     //port ? puede ser tipo numero o string (union type) pueden recibir o no
     constructor(port) {
@@ -74,6 +75,7 @@ class App {
         this.app.use('/empleado', empleado_routes_1.default);
         this.app.use('/login', login_routes_1.default);
         this.app.use('/password', password_routes_1.default);
+        this.app.use('/cajachica', cajachica_routes_1.default);
         this.app.use('/reporteventas', reporteventas_routes_1.default);
         this.app.use('/reportecomisiones', reportecomisiones_routes_1.default);
         this.app.use('/reporteinventario', reporteinventario_routes_1.default);
