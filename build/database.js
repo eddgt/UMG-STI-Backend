@@ -18,7 +18,7 @@ function connect() {
             user: 'adminOish',
             password: '123Oishi*',
             database: 'BDRROISHI',
-            connectionLimit: 10
+            connectionLimit: 20
         });
         /*
             const connection = await createPool({

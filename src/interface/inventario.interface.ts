@@ -1,6 +1,6 @@
 export interface Inventario {
     id?: number;
-    referencia?: string;
+    referencia_id?: number;
     producto?: string;
     entrada?: number;
     salida?: number;
