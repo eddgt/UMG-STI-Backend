@@ -20,7 +20,7 @@ class UsuarioController {
     getUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
-            const usuario = yield conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios');
+            const usuario = yield conne.query('SELECT id, usuario, email, rol, nombre, date_create FROM Usuarios');
             return res.json(usuario[0]);
         });
     }

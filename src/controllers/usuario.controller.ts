@@ -15,7 +15,7 @@ class UsuarioController {
     public async getUsuario(req: Request, res: Response): Promise<Response> {
         const conne = await connect();
 
-        const usuario = await conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios');
+        const usuario = await conne.query('SELECT id, usuario, email, rol, nombre, date_create FROM Usuarios');
         return res.json(usuario[0]);
     }
 
