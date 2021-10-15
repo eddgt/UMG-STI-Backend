@@ -34,7 +34,8 @@ class UsuarioController {
                 yield conne.end();
                 console.log(result);
                 return res.json({
-                    message: 'Usuario creado'
+                    message: 'Usuario creado',
+                    id: result[0].insertId
                 });
             }
             catch (error) {
@@ -48,7 +49,7 @@ class UsuarioController {
         return __awaiter(this, void 0, void 0, function* () {
             const id_usuario = req.params.id;
             const conne = yield (0, database_1.connect)();
-            const usuario = yield conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios WHERE id = ?', [id_usuario]);
+            const usuario = yield conne.query('SELECT id, usuario, email, rol, nombre, date_create FROM Usuarios WHERE id = ?', [id_usuario]);
             yield conne.end();
             return res.json(usuario[0]);
         });
