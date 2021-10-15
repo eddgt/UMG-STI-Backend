@@ -25,6 +25,7 @@ class EmpleadoController {
 
             const conne = await connect();
             await conne.query('INSERT INTO employees SET ?', [newEmpleado]);
+            await conne.end()
 
             return res.json({
                 message: 'Empleado creado'
@@ -43,6 +44,7 @@ class EmpleadoController {
             const conne = await connect();
 
             const empleado = await conne.query('SELECT * FROM employees WHERE id = ?', [id_empleado]);
+            await conne.end()
 
             return res.json(empleado[0]);
         } catch (error) {
@@ -58,6 +60,7 @@ class EmpleadoController {
             const conne = await connect();
 
             await conne.query('DELETE FROM employees WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Empleado eliminado'
@@ -77,6 +80,7 @@ class EmpleadoController {
             const conne = await connect();
 
             await conne.query('UPDATE employees set ? WHERE id = ?', [update, id_update])
+            await conne.end()
 
             return res.json({
                 message: 'Empleado actualizado'

@@ -31,6 +31,7 @@ class TipoPagoController {
                 //console.log(newTipoPago);
                 const conne = yield (0, database_1.connect)();
                 const result = yield conne.query('INSERT INTO tipo_pago SET ?', [newTipoPago]);
+                yield conne.end();
                 return res.json({
                     message: 'TipoPago creado',
                     id: result[0].insertId
@@ -48,6 +49,7 @@ class TipoPagoController {
             const id_tipopago = req.params.id;
             const conne = yield (0, database_1.connect)();
             const tipopago = yield conne.query('SELECT * FROM tipo_pago WHERE id = ?', [id_tipopago]);
+            yield conne.end();
             return res.json(tipopago[0]);
         });
     }
@@ -57,6 +59,7 @@ class TipoPagoController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM tipo_pago WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'tipopago eliminado'
                 });
@@ -75,6 +78,7 @@ class TipoPagoController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE tipo_pago set ? WHERE id = ?', [update, id_tipopago]);
+                yield conne.end();
                 return res.json({
                     message: 'tipopago actualizado'
                 });

@@ -26,6 +26,7 @@ class ReporteInventarioController {
             const reporte = yield conne.query('select id CODIGO, producto DESCRIPCION, ' +
                 'SUM(entrada-salida) SALDO from inventario ' +
                 'group by id, producto ', [inicio, fin]);
+            yield conne.end();
             // console.log(' ' + inicio + ' ' + fin + ' ' + reporte)
             return res.json(reporte[0]);
         });

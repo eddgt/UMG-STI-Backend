@@ -73,6 +73,7 @@ class DetalleCompraController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE detalle_compra set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Detalle Compra actualizada'
                 });

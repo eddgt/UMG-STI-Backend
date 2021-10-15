@@ -21,6 +21,7 @@ class MesaController {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
             const mesa = yield conne.query('SELECT * FROM mesa');
+            yield conne.end();
             return res.json(mesa[0]);
         });
     }
@@ -31,6 +32,7 @@ class MesaController {
                 //console.log(newMesa);
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO mesa SET ?', [newMesa]);
+                yield conne.end();
                 return res.json({
                     message: 'Mesa creada'
                 });
@@ -47,6 +49,7 @@ class MesaController {
             const id_mesa = req.params.id;
             const conne = yield (0, database_1.connect)();
             const mesa = yield conne.query('SELECT * FROM mesa WHERE id = ?', [id_mesa]);
+            yield conne.end();
             return res.json(mesa[0]);
         });
     }
@@ -56,6 +59,7 @@ class MesaController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM mesa WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Mesa eliminada'
                 });
@@ -74,6 +78,7 @@ class MesaController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE mesa set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Mesa actualizada'
                 });

@@ -26,6 +26,7 @@ class TipoPagoController {
 
             const conne = await connect();
             const result = await conne.query('INSERT INTO tipo_pago SET ?', [newTipoPago]);
+            await conne.end()
 
             return res.json({
                 message: 'TipoPago creado',
@@ -47,6 +48,7 @@ class TipoPagoController {
         const conne = await connect();
 
         const tipopago = await conne.query('SELECT * FROM tipo_pago WHERE id = ?', [id_tipopago]);
+        await conne.end()
 
         return res.json(tipopago[0]);
     }
@@ -58,6 +60,7 @@ class TipoPagoController {
             const conne = await connect();
 
             await conne.query('DELETE FROM tipo_pago WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'tipopago eliminado'
@@ -79,6 +82,7 @@ class TipoPagoController {
             const conne = await connect();
 
             await conne.query('UPDATE tipo_pago set ? WHERE id = ?', [update, id_tipopago])
+            await conne.end()
 
             return res.json({
                 message: 'tipopago actualizado'

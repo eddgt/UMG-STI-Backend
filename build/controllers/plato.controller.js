@@ -21,6 +21,7 @@ class PlatoController {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
             const plato = yield conne.query('SELECT * FROM plato');
+            yield conne.end();
             return res.json(plato[0]);
         });
     }
@@ -31,6 +32,7 @@ class PlatoController {
                 //console.log(newPlato);
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO plato SET ?', [newPlato]);
+                yield conne.end();
                 return res.json({
                     message: 'Plato creado'
                 });
@@ -47,6 +49,7 @@ class PlatoController {
             const id_plato = req.params.id;
             const conne = yield (0, database_1.connect)();
             const plato = yield conne.query('SELECT * FROM plato WHERE id = ?', [id_plato]);
+            yield conne.end();
             return res.json(plato[0]);
         });
     }
@@ -56,6 +59,7 @@ class PlatoController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM plato WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Plato eliminado'
                 });
@@ -74,6 +78,7 @@ class PlatoController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE plato set ? WHERE id = ?', [update, id_plato]);
+                yield conne.end();
                 return res.json({
                     message: 'Plato actualizado'
                 });

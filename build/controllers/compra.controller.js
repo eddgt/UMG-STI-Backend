@@ -22,6 +22,7 @@ class CompraController {
             try {
                 const conne = yield (0, database_1.connect)();
                 const compra = yield conne.query('SELECT * FROM compra');
+                yield conne.end();
                 return res.json(compra[0]);
             }
             catch (error) {
@@ -38,6 +39,7 @@ class CompraController {
                 //console.log(newCompra);
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO compra SET ?', [newCompra]);
+                yield conne.end();
                 return res.json({
                     message: 'Compra creado'
                 });
@@ -55,6 +57,7 @@ class CompraController {
                 const id_compra = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 const compra = yield conne.query('SELECT * FROM compra WHERE id = ?', [id_compra]);
+                yield conne.end();
                 return res.json(compra[0]);
             }
             catch (error) {
@@ -70,6 +73,7 @@ class CompraController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM compra WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Compra eliminada'
                 });
@@ -88,6 +92,7 @@ class CompraController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE compra set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Compra actualizada'
                 });

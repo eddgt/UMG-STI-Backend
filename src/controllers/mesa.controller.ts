@@ -16,6 +16,8 @@ class MesaController {
         const conne = await connect();
 
         const mesa = await conne.query('SELECT * FROM mesa');
+        await conne.end()
+
         return res.json(mesa[0]);
     }
 
@@ -26,6 +28,7 @@ class MesaController {
 
             const conne = await connect();
             await conne.query('INSERT INTO mesa SET ?', [newMesa]);
+            await conne.end()
 
             return res.json({
                 message: 'Mesa creada'
@@ -46,6 +49,7 @@ class MesaController {
         const conne = await connect();
 
         const mesa = await conne.query('SELECT * FROM mesa WHERE id = ?', [id_mesa]);
+        await conne.end()
 
         return res.json(mesa[0]);
     }
@@ -57,6 +61,7 @@ class MesaController {
             const conne = await connect();
 
             await conne.query('DELETE FROM mesa WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Mesa eliminada'
@@ -78,6 +83,7 @@ class MesaController {
             const conne = await connect();
 
             await conne.query('UPDATE mesa set ? WHERE id = ?', [update, id_delete])
+            await conne.end()
 
             return res.json({
                 message: 'Mesa actualizada'

@@ -21,6 +21,7 @@ class FacturaController {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
             const factura = yield conne.query('SELECT * FROM factura');
+            yield conne.end();
             return res.json(factura[0]);
         });
     }
@@ -30,6 +31,7 @@ class FacturaController {
                 const newFactura = req.body;
                 const conne = yield (0, database_1.connect)();
                 const result = yield conne.query('INSERT INTO factura SET ?', [newFactura]);
+                yield conne.end();
                 return res.json({
                     message: 'Factura creada',
                     id: result[0].insertId
@@ -47,6 +49,7 @@ class FacturaController {
             const id_factura = req.params.id;
             const conne = yield (0, database_1.connect)();
             const factura = yield conne.query('SELECT * FROM factura WHERE id = ?', [id_factura]);
+            yield conne.end();
             return res.json(factura[0]);
         });
     }
@@ -56,6 +59,7 @@ class FacturaController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM factura WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Factura eliminada'
                 });
@@ -74,6 +78,7 @@ class FacturaController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE factura set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Factura actualizada'
                 });

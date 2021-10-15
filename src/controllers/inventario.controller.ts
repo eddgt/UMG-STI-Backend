@@ -16,6 +16,7 @@ class InventarioController {
         const conne = await connect();
 
         const inventario = await conne.query('SELECT * FROM inventario');
+        await conne.end()
         return res.json(inventario[0]);
     }
 
@@ -25,6 +26,7 @@ class InventarioController {
 
             const conne = await connect();
             await conne.query('INSERT INTO inventario SET ?', [newInventario]);
+            await conne.end()
 
             return res.json({
                 message: 'Inventario creado'
@@ -45,6 +47,7 @@ class InventarioController {
         const conne = await connect();
 
         const inventario = await conne.query('SELECT * FROM inventario WHERE id = ?', [id_inventario]);
+        await conne.end()
 
         return res.json(inventario[0]);
     }
@@ -56,6 +59,7 @@ class InventarioController {
             const conne = await connect();
 
             await conne.query('DELETE FROM inventario WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Inventario eliminado'
@@ -77,6 +81,7 @@ class InventarioController {
             const conne = await connect();
 
             await conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_delete])
+            await conne.end()
 
             return res.json({
                 message: 'Inventario actualizado'

@@ -16,6 +16,7 @@ class DetalleFacturaController {
         const conne = await connect();
 
         const detallefactura = await conne.query('SELECT * FROM fact_detalle');
+        await conne.end()
         return res.json(detallefactura[0]);
     }
 
@@ -25,6 +26,7 @@ class DetalleFacturaController {
 
             const conne = await connect();
             await conne.query('INSERT INTO fact_detalle SET ?', [newDetalleFactura]);
+            await conne.end()
 
             return res.json({
                 message: 'DetalleFactura creado'
@@ -45,6 +47,7 @@ class DetalleFacturaController {
         const conne = await connect();
 
         const detallefactura = await conne.query('SELECT * FROM fact_detalle WHERE factura_id = ?', [id_factura]);
+        await conne.end()
 
         return res.json(detallefactura[0]);
     }
@@ -56,6 +59,7 @@ class DetalleFacturaController {
             const conne = await connect();
 
             await conne.query('DELETE FROM fact_detalle WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'DetalleFactura eliminada'
@@ -77,6 +81,7 @@ class DetalleFacturaController {
             const conne = await connect();
 
             await conne.query('UPDATE fact_datelle set ? WHERE id = ?', [update, id_update])
+            await conne.end()
 
             return res.json({
                 message: 'DetalleFactura actualizado'

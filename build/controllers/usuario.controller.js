@@ -31,6 +31,7 @@ class UsuarioController {
                 //console.log(newUsuario);
                 const conne = yield (0, database_1.connect)();
                 const result = yield conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
+                yield conne.end();
                 console.log(result);
                 return res.json({
                     message: 'Usuario creado'
@@ -48,6 +49,7 @@ class UsuarioController {
             const id_usuario = req.params.id;
             const conne = yield (0, database_1.connect)();
             const usuario = yield conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios WHERE id = ?', [id_usuario]);
+            yield conne.end();
             return res.json(usuario[0]);
         });
     }
@@ -57,6 +59,7 @@ class UsuarioController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM Usuarios WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'usuario eliminado'
                 });
@@ -75,6 +78,7 @@ class UsuarioController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE Usuarios set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Usuario actualizado'
                 });

@@ -16,6 +16,7 @@ class CajaChicaController {
         const conne = await connect();
 
         const cajachica = await conne.query('SELECT * FROM caja_chica');
+        await conne.end()
         return res.json(cajachica[0]);
     }
 
@@ -25,6 +26,7 @@ class CajaChicaController {
 
             const conne = await connect();
             const result = await conne.query('INSERT INTO caja_chica SET ?', [newCajaChica]);
+            await conne.end()
 
             return res.json({
                 message: 'Caja Chica creada',
@@ -46,6 +48,7 @@ class CajaChicaController {
         const conne = await connect();
 
         const cajachica = await conne.query('SELECT * FROM caja_chica WHERE id = ?', [id_caja]);
+        await conne.end()
 
         return res.json(cajachica[0]);
     }
@@ -57,6 +60,7 @@ class CajaChicaController {
             const conne = await connect();
 
             await conne.query('DELETE FROM caja_chica WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Caja Chija eliminada'
@@ -78,6 +82,7 @@ class CajaChicaController {
             const conne = await connect();
 
             await conne.query('UPDATE caja_chica set ? WHERE id = ?', [update, id_update])
+            await conne.end()
 
             return res.json({
                 message: 'Caja Chica actualizada'

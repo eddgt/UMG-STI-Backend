@@ -24,6 +24,7 @@ class PasswordController {
                 const conne = yield (0, database_1.connect)();
                 const result = yield conne.query('UPDATE Usuarios set pass = ? WHERE email = ?', [update.pass, update.email]);
                 console.log("result " + JSON.stringify(result[0]));
+                yield conne.end();
                 let resultObj = { affectedRows: null, fieldCount: null, RowDataPacket: null, OkPacket: null, ResultSetHeader: null };
                 resultObj = result[0];
                 console.log("resultObj " + resultObj);

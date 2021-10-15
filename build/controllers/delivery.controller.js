@@ -55,6 +55,7 @@ class DeliveryController {
                 const id_delivery = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 const delivery = yield conne.query('SELECT * FROM delivery WHERE id = ?', [id_delivery]);
+                yield conne.end();
                 return res.json(delivery[0]);
             }
             catch (error) {
@@ -70,6 +71,7 @@ class DeliveryController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM delivery WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'delivery eliminado'
                 });
@@ -88,6 +90,7 @@ class DeliveryController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE delivery set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'delivery actualizado'
                 });

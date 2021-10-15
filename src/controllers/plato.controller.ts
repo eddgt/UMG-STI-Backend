@@ -16,6 +16,8 @@ class PlatoController {
         const conne = await connect();
 
         const plato = await conne.query('SELECT * FROM plato');
+        await conne.end()
+        
         return res.json(plato[0]);
     }
 
@@ -26,6 +28,7 @@ class PlatoController {
 
             const conne = await connect();
             await conne.query('INSERT INTO plato SET ?', [newPlato]);
+            await conne.end()
 
             return res.json({
                 message: 'Plato creado'
@@ -46,6 +49,7 @@ class PlatoController {
         const conne = await connect();
 
         const plato = await conne.query('SELECT * FROM plato WHERE id = ?', [id_plato]);
+        await conne.end()
 
         return res.json(plato[0]);
     }
@@ -57,6 +61,7 @@ class PlatoController {
             const conne = await connect();
 
             await conne.query('DELETE FROM plato WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Plato eliminado'
@@ -78,6 +83,7 @@ class PlatoController {
             const conne = await connect();
 
             await conne.query('UPDATE plato set ? WHERE id = ?', [update, id_plato])
+            await conne.end()
 
             return res.json({
                 message: 'Plato actualizado'

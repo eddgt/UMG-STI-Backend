@@ -26,6 +26,8 @@ class UsuarioController {
 
             const conne = await connect();
             const result = await conne.query('INSERT INTO Usuarios SET ?', [newUsuario]);
+            await conne.end()
+
             console.log(result);
             return res.json({
                 message: 'Usuario creado'
@@ -44,6 +46,7 @@ class UsuarioController {
         const conne = await connect();
 
         const usuario = await conne.query('SELECT usuario, email, nombre, date_create FROM Usuarios WHERE id = ?', [id_usuario]);
+        await conne.end()
 
         return res.json(usuario[0]);
     }
@@ -54,6 +57,7 @@ class UsuarioController {
             const conne = await connect();
 
             await conne.query('DELETE FROM Usuarios WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'usuario eliminado'
@@ -73,6 +77,7 @@ class UsuarioController {
             const conne = await connect();
 
             await conne.query('UPDATE Usuarios set ? WHERE id = ?', [update, id_delete])
+            await conne.end()
 
             return res.json({
                 message: 'Usuario actualizado'

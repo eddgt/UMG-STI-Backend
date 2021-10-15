@@ -27,13 +27,15 @@ class LoginController {
                 console.log("If");
                 console.log(resultObj);
                 console.log(resultObj.length);
+                await conne.end()
                 return res.json(login[0]);
             } else {
                 console.log("else");
+                await conne.end()
                 return res.json({ message: "Usiario o Password inválidos", messageCode: 1 });
             }
 
-
+            
         } catch (error) {
             console.log("catch try auntenticar..." + error);
             return res.json({

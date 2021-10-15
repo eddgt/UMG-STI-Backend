@@ -17,6 +17,7 @@ class CompraController {
             const conne = await connect();
 
             const compra = await conne.query('SELECT * FROM compra');
+            await conne.end()
             return res.json(compra[0]);
         } catch (error) {
             return res.json({
@@ -32,6 +33,7 @@ class CompraController {
 
             const conne = await connect();
             await conne.query('INSERT INTO compra SET ?', [newCompra]);
+            await conne.end()
 
             return res.json({
                 message: 'Compra creado'
@@ -52,6 +54,7 @@ class CompraController {
             const conne = await connect();
 
             const compra = await conne.query('SELECT * FROM compra WHERE id = ?', [id_compra]);
+            await conne.end()
 
             return res.json(compra[0]);
         } catch (error) {
@@ -68,6 +71,7 @@ class CompraController {
             const conne = await connect();
 
             await conne.query('DELETE FROM compra WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Compra eliminada'
@@ -89,6 +93,7 @@ class CompraController {
             const conne = await connect();
 
             await conne.query('UPDATE compra set ? WHERE id = ?', [update, id_delete])
+            await conne.end()
 
             return res.json({
                 message: 'Compra actualizada'

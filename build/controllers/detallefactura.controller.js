@@ -21,6 +21,7 @@ class DetalleFacturaController {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
             const detallefactura = yield conne.query('SELECT * FROM fact_detalle');
+            yield conne.end();
             return res.json(detallefactura[0]);
         });
     }
@@ -30,6 +31,7 @@ class DetalleFacturaController {
                 const newDetalleFactura = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO fact_detalle SET ?', [newDetalleFactura]);
+                yield conne.end();
                 return res.json({
                     message: 'DetalleFactura creado'
                 });
@@ -46,6 +48,7 @@ class DetalleFacturaController {
             const id_factura = req.params.id;
             const conne = yield (0, database_1.connect)();
             const detallefactura = yield conne.query('SELECT * FROM fact_detalle WHERE factura_id = ?', [id_factura]);
+            yield conne.end();
             return res.json(detallefactura[0]);
         });
     }
@@ -55,6 +58,7 @@ class DetalleFacturaController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM fact_detalle WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'DetalleFactura eliminada'
                 });
@@ -73,6 +77,7 @@ class DetalleFacturaController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE fact_datelle set ? WHERE id = ?', [update, id_update]);
+                yield conne.end();
                 return res.json({
                     message: 'DetalleFactura actualizado'
                 });

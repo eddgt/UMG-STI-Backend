@@ -22,6 +22,7 @@ class ClienteController {
             try {
                 const conne = yield (0, database_1.connect)();
                 const cliente = yield conne.query('SELECT * FROM cliente');
+                yield conne.end();
                 return res.json(cliente[0]);
             }
             catch (error) {
@@ -38,6 +39,7 @@ class ClienteController {
                 //console.log(newCliente);
                 const conne = yield (0, database_1.connect)();
                 const result = yield conne.query('INSERT INTO cliente SET ?', [newCliente]);
+                yield conne.end();
                 return res.json({
                     message: 'Cliente creado',
                     id: result[0].insertId
@@ -56,6 +58,7 @@ class ClienteController {
                 const id_cliente = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 const cliente = yield conne.query('SELECT * FROM cliente WHERE id = ?', [id_cliente]);
+                yield conne.end();
                 return res.json(cliente[0]);
             }
             catch (error) {
@@ -71,6 +74,7 @@ class ClienteController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM cliente WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Cliente eliminado'
                 });
@@ -89,6 +93,7 @@ class ClienteController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE cliente set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'cliente actualizado'
                 });

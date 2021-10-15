@@ -17,6 +17,7 @@ class ClienteController {
             const conne = await connect();
 
             const cliente = await conne.query('SELECT * FROM cliente');
+            await conne.end()
             return res.json(cliente[0]);
         } catch (error) {
             return res.json({
@@ -33,6 +34,7 @@ class ClienteController {
 
             const conne = await connect();
             const result = await conne.query('INSERT INTO cliente SET ?', [newCliente]);
+            await conne.end()
 
             return res.json({
                 message: 'Cliente creado',
@@ -52,6 +54,7 @@ class ClienteController {
             const conne = await connect();
 
             const cliente = await conne.query('SELECT * FROM cliente WHERE id = ?', [id_cliente]);
+            await conne.end()
 
             return res.json(cliente[0]);
         } catch (error) {
@@ -67,6 +70,7 @@ class ClienteController {
             const conne = await connect();
 
             await conne.query('DELETE FROM cliente WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Cliente eliminado'
@@ -86,6 +90,7 @@ class ClienteController {
             const conne = await connect();
 
             await conne.query('UPDATE cliente set ? WHERE id = ?', [update, id_delete])
+            await conne.end()
 
             return res.json({
                 message: 'cliente actualizado'

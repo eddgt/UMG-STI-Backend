@@ -77,6 +77,7 @@ class DetalleCompraController {
             const conne = await connect();
 
             await conne.query('UPDATE detalle_compra set ? WHERE id = ?', [update, id_delete])
+            await conne.end()
 
             return res.json({
                 message: 'Detalle Compra actualizada'

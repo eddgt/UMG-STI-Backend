@@ -21,6 +21,7 @@ class CajaChicaController {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
             const cajachica = yield conne.query('SELECT * FROM caja_chica');
+            yield conne.end();
             return res.json(cajachica[0]);
         });
     }
@@ -30,6 +31,7 @@ class CajaChicaController {
                 const newCajaChica = req.body;
                 const conne = yield (0, database_1.connect)();
                 const result = yield conne.query('INSERT INTO caja_chica SET ?', [newCajaChica]);
+                yield conne.end();
                 return res.json({
                     message: 'Caja Chica creada',
                     id: result[0].insertId
@@ -47,6 +49,7 @@ class CajaChicaController {
             const id_caja = req.params.id;
             const conne = yield (0, database_1.connect)();
             const cajachica = yield conne.query('SELECT * FROM caja_chica WHERE id = ?', [id_caja]);
+            yield conne.end();
             return res.json(cajachica[0]);
         });
     }
@@ -56,6 +59,7 @@ class CajaChicaController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM caja_chica WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Caja Chija eliminada'
                 });
@@ -74,6 +78,7 @@ class CajaChicaController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE caja_chica set ? WHERE id = ?', [update, id_update]);
+                yield conne.end();
                 return res.json({
                     message: 'Caja Chica actualizada'
                 });

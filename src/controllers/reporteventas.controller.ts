@@ -27,6 +27,7 @@ class ReporteVentasController {
         'inner join plato c on c.id = b.plato_id '+
         'where a.date_fact between ? and ? '+
         ' group by a.date_fact, b.cantidad, c.descripcion, c.precio, a.delivery_id', [inicio, fin]);
+        await conne.end()
 
         // console.log(' ' + inicio + ' ' + fin + ' ' + reporte)
         return res.json(reporte[0]);

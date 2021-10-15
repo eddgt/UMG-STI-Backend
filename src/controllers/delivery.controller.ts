@@ -51,6 +51,7 @@ class DeliveryController {
             const conne = await connect();
 
             const delivery = await conne.query('SELECT * FROM delivery WHERE id = ?', [id_delivery]);
+            await conne.end()
 
             return res.json(delivery[0]);
         } catch (error) {
@@ -66,6 +67,7 @@ class DeliveryController {
             const conne = await connect();
 
             await conne.query('DELETE FROM delivery WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'delivery eliminado'
@@ -87,6 +89,7 @@ class DeliveryController {
             const conne = await connect();
 
             await conne.query('UPDATE delivery set ? WHERE id = ?', [update, id_delete])
+            await conne.end()
 
             return res.json({
                 message: 'delivery actualizado'

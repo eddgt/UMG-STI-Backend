@@ -20,9 +20,11 @@ class PasswordController {
 
             const result = await conne.query('UPDATE Usuarios set pass = ? WHERE email = ?', [update.pass, update.email])
             console.log("result " + JSON.stringify(result[0]));
+            await conne.end()
+            
             let resultObj = { affectedRows: null, fieldCount: null, RowDataPacket: null, OkPacket: null, ResultSetHeader: null }
             resultObj = result[0];
-            console.log("resultObj " + resultObj);
+            console.log("resultObj " + resultObj);            
 
             if (resultObj.affectedRows === 1) {
                 return res.json({
@@ -36,6 +38,7 @@ class PasswordController {
 
                 })
             }
+            
         } catch (error) {
             return res.json({
                 message: error

@@ -30,6 +30,7 @@ class EmpleadoController {
                 const newEmpleado = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO employees SET ?', [newEmpleado]);
+                yield conne.end();
                 return res.json({
                     message: 'Empleado creado'
                 });
@@ -47,6 +48,7 @@ class EmpleadoController {
                 const id_empleado = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 const empleado = yield conne.query('SELECT * FROM employees WHERE id = ?', [id_empleado]);
+                yield conne.end();
                 return res.json(empleado[0]);
             }
             catch (error) {
@@ -62,6 +64,7 @@ class EmpleadoController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM employees WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Empleado eliminado'
                 });
@@ -80,6 +83,7 @@ class EmpleadoController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE employees set ? WHERE id = ?', [update, id_update]);
+                yield conne.end();
                 return res.json({
                     message: 'Empleado actualizado'
                 });

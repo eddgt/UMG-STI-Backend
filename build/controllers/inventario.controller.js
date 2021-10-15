@@ -21,6 +21,7 @@ class InventarioController {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
             const inventario = yield conne.query('SELECT * FROM inventario');
+            yield conne.end();
             return res.json(inventario[0]);
         });
     }
@@ -30,6 +31,7 @@ class InventarioController {
                 const newInventario = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('INSERT INTO inventario SET ?', [newInventario]);
+                yield conne.end();
                 return res.json({
                     message: 'Inventario creado'
                 });
@@ -46,6 +48,7 @@ class InventarioController {
             const id_inventario = req.params.id;
             const conne = yield (0, database_1.connect)();
             const inventario = yield conne.query('SELECT * FROM inventario WHERE id = ?', [id_inventario]);
+            yield conne.end();
             return res.json(inventario[0]);
         });
     }
@@ -55,6 +58,7 @@ class InventarioController {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('DELETE FROM inventario WHERE id = ? ', [id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Inventario eliminado'
                 });
@@ -73,6 +77,7 @@ class InventarioController {
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
                 yield conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_delete]);
+                yield conne.end();
                 return res.json({
                     message: 'Inventario actualizado'
                 });
