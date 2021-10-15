@@ -43,9 +43,9 @@ class DetalleFacturaController {
     }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_detallefactura = req.params.id;
+            const id_factura = req.params.id;
             const conne = yield (0, database_1.connect)();
-            const detallefactura = yield conne.query('SELECT * FROM fact_detalle WHERE id = ?', [id_detallefactura]);
+            const detallefactura = yield conne.query('SELECT * FROM fact_detalle WHERE factura_id = ?', [id_factura]);
             return res.json(detallefactura[0]);
         });
     }

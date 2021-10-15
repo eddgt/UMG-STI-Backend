@@ -40,11 +40,11 @@ class DetalleFacturaController {
 
     public async Obtener(req: Request, res: Response): Promise<Response> {
 
-        const id_detallefactura = req.params.id;
+        const id_factura = req.params.id;
 
         const conne = await connect();
 
-        const detallefactura = await conne.query('SELECT * FROM fact_detalle WHERE id = ?', [id_detallefactura]);
+        const detallefactura = await conne.query('SELECT * FROM fact_detalle WHERE factura_id = ?', [id_factura]);
 
         return res.json(detallefactura[0]);
     }
