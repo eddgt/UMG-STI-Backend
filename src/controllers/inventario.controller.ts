@@ -25,11 +25,12 @@ class InventarioController {
             const newInventario: Inventario = req.body;
 
             const conne = await connect();
-            await conne.query('INSERT INTO inventario SET ?', [newInventario]);
+            const result = await conne.query('INSERT INTO inventario SET ?', [newInventario]);
             await conne.end()
 
             return res.json({
-                message: 'Inventario creado'
+                message: 'Inventario creado',
+                id: result[0].insertId
             });
 
         } catch (error) {

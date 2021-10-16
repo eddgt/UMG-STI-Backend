@@ -31,10 +31,11 @@ class MesaController {
                 const newMesa = req.body;
                 //console.log(newMesa);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO mesa SET ?', [newMesa]);
+                const result = yield conne.query('INSERT INTO mesa SET ?', [newMesa]);
                 yield conne.end();
                 return res.json({
-                    message: 'Mesa creada'
+                    message: 'Mesa creada',
+                    id: result[0].insertId
                 });
             }
             catch (error) {

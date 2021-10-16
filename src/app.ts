@@ -21,6 +21,7 @@ import reporteventasRoutes from './routes/reporteventas.routes';
 import reportecomisionesRoutes from './routes/reportecomisiones.routes';
 import reporteinventarioRoutes from './routes/reporteinventario.routes';
 import cajachicaRoutes from './routes/cajachica.routes';
+import totalmesaRoutes from './routes/totalmesa.routes';
 
 
 export class App {
@@ -63,6 +64,7 @@ export class App {
         this.app.use('/detallecompra', detalleCompraRoutes);
         this.app.use('/delivery', deliveryRoutes);
         this.app.use('/mesa', mesaRoutes);
+        this.app.use('/totalmesa', totalmesaRoutes);
         this.app.use('/factura', facturaRoutes);
         this.app.use('/detallefactura', detallefacturaRoutes);
         this.app.use('/inventario', inventarioRoutes);

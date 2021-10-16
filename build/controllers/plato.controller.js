@@ -31,10 +31,11 @@ class PlatoController {
                 const newPlato = req.body;
                 //console.log(newPlato);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO plato SET ?', [newPlato]);
+                const result = yield conne.query('INSERT INTO plato SET ?', [newPlato]);
                 yield conne.end();
                 return res.json({
-                    message: 'Plato creado'
+                    message: 'Plato creado',
+                    id: result[0].insertId
                 });
             }
             catch (error) {

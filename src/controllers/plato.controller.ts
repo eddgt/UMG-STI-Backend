@@ -17,7 +17,7 @@ class PlatoController {
 
         const plato = await conne.query('SELECT * FROM plato');
         await conne.end()
-        
+
         return res.json(plato[0]);
     }
 
@@ -27,11 +27,12 @@ class PlatoController {
             //console.log(newPlato);
 
             const conne = await connect();
-            await conne.query('INSERT INTO plato SET ?', [newPlato]);
+            const result = await conne.query('INSERT INTO plato SET ?', [newPlato]);
             await conne.end()
 
             return res.json({
-                message: 'Plato creado'
+                message: 'Plato creado',
+                id: result[0].insertId
             });
 
         } catch (error) {

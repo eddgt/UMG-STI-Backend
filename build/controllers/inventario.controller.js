@@ -30,10 +30,11 @@ class InventarioController {
             try {
                 const newInventario = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO inventario SET ?', [newInventario]);
+                const result = yield conne.query('INSERT INTO inventario SET ?', [newInventario]);
                 yield conne.end();
                 return res.json({
-                    message: 'Inventario creado'
+                    message: 'Inventario creado',
+                    id: result[0].insertId
                 });
             }
             catch (error) {

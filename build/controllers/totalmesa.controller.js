@@ -20,7 +20,7 @@ class TotalMesaController {
     getTotalMesa(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
-            const mesa = yield conne.query('SELECT * FROM mesa');
+            const mesa = yield conne.query('SELECT * FROM totalmesas');
             yield conne.end();
             return res.json(mesa[0]);
         });
@@ -31,10 +31,11 @@ class TotalMesaController {
                 const newTotalMesa = req.body;
                 //console.log(newMesa);
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('INSERT INTO mesa SET ?', [newTotalMesa]);
+                const result = yield conne.query('INSERT INTO totalmesas SET ?', [newTotalMesa]);
                 yield conne.end();
                 return res.json({
-                    message: 'Total Mesa creado'
+                    message: 'Total Mesa creado',
+                    id: result[0].insertId
                 });
             }
             catch (error) {
@@ -49,7 +50,7 @@ class TotalMesaController {
             const id_mesa = req.params.idm;
             const id_factura = req.params.idf;
             const conne = yield (0, database_1.connect)();
-            const totalmesa = yield conne.query('SELECT * FROM mesa WHERE id = ? and id = ?', [id_mesa, id_factura]);
+            const totalmesa = yield conne.query('SELECT * FROM totalmesas WHERE id_mesa = ? and id_factura = ?', [id_mesa, id_factura]);
             yield conne.end();
             return res.json(totalmesa[0]);
         });
@@ -59,7 +60,7 @@ class TotalMesaController {
             try {
                 const id_delete = req.params.id;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('DELETE FROM mesa WHERE id = ? ', [id_delete]);
+                yield conne.query('DELETE FROM totalmesa WHERE id = ? ', [id_delete]);
                 yield conne.end();
                 return res.json({
                     message: 'Total Mesa eliminado'
@@ -78,7 +79,7 @@ class TotalMesaController {
                 const id_update = req.params.id;
                 const update = req.body;
                 const conne = yield (0, database_1.connect)();
-                yield conne.query('UPDATE mesa set ? WHERE id = ?', [update, id_update]);
+                yield conne.query('UPDATE totalmesas set ? WHERE id = ?', [update, id_update]);
                 yield conne.end();
                 return res.json({
                     message: 'Total Mesa actualizado'

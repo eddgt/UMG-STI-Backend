@@ -35,6 +35,7 @@ const reporteventas_routes_1 = __importDefault(require("./routes/reporteventas.r
 const reportecomisiones_routes_1 = __importDefault(require("./routes/reportecomisiones.routes"));
 const reporteinventario_routes_1 = __importDefault(require("./routes/reporteinventario.routes"));
 const cajachica_routes_1 = __importDefault(require("./routes/cajachica.routes"));
+const totalmesa_routes_1 = __importDefault(require("./routes/totalmesa.routes"));
 class App {
     //port ? puede ser tipo numero o string (union type) pueden recibir o no
     constructor(port) {
@@ -66,6 +67,7 @@ class App {
         this.app.use('/detallecompra', detallecompra_routes_1.default);
         this.app.use('/delivery', delivery_routes_1.default);
         this.app.use('/mesa', mesa_routes_1.default);
+        this.app.use('/totalmesa', totalmesa_routes_1.default);
         this.app.use('/factura', factura_routes_1.default);
         this.app.use('/detallefactura', detallefactura_routes_1.default);
         this.app.use('/inventario', inventario_routes_1.default);
