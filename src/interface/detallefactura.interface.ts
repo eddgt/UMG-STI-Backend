@@ -3,5 +3,5 @@ export interface DetalleFactura {
     factura_id?: number;
     plato_id?: number;
     cantidad?: number;
-    precio_id?: number;
+    precio?: number;
 }
