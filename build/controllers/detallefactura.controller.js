@@ -20,7 +20,7 @@ class DetalleFacturaController {
     getDetalleFactura(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
-            const detallefactura = yield conne.query('SELECT * FROM fact_detalle');
+            const detallefactura = yield conne.query('SELECT a.*, b.descripcion FROM fact_detalle a inner join plato b on a.plato_id = b.id');
             yield conne.end();
             return res.json(detallefactura[0]);
         });
@@ -47,7 +47,7 @@ class DetalleFacturaController {
         return __awaiter(this, void 0, void 0, function* () {
             const id_factura = req.params.id;
             const conne = yield (0, database_1.connect)();
-            const detallefactura = yield conne.query('SELECT * FROM fact_detalle WHERE factura_id = ?', [id_factura]);
+            const detallefactura = yield conne.query('SELECT a.*, b.descripcion FROM fact_detalle a inner join plato b on a.plato_id = b.id WHERE a.factura_id = ?', [id_factura]);
             yield conne.end();
             return res.json(detallefactura[0]);
         });
