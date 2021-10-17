@@ -44,6 +44,15 @@ class FacturaController {
             }
         });
     }
+    ObtenerFacturasMesa(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const mesa_id = req.params.id;
+            const conne = yield (0, database_1.connect)();
+            const factura = yield conne.query('SELECT * FROM factura WHERE mesa_id = ? and status="ACTIVA"', [mesa_id]);
+            yield conne.end();
+            return res.json(factura[0]);
+        });
+    }
     Obtener(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id_factura = req.params.id;

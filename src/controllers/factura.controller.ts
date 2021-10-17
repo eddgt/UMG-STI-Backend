@@ -41,13 +41,25 @@ class FacturaController {
 
     }
 
+    public async ObtenerFacturasMesa(req: Request, res: Response): Promise<Response> {
+
+        const mesa_id = req.params.id;
+
+        const conne = await connect();
+
+        const factura = await conne.query('SELECT * FROM factura WHERE mesa_id = ? and status="ACTIVA"', [mesa_id]);
+        await conne.end()
+
+        return res.json(factura[0]);
+    }
+
     public async Obtener(req: Request, res: Response): Promise<Response> {
 
         const id_factura = req.params.id;
 
         const conne = await connect();
 
-        const factura = await conne.query('SELECT * FROM factura WHERE id = ?', [id_factura]);        
+        const factura = await conne.query('SELECT * FROM factura WHERE id = ?', [id_factura]);
         await conne.end()
 
         return res.json(factura[0]);

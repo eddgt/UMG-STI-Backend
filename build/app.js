@@ -23,6 +23,7 @@ const delivery_routes_1 = __importDefault(require("./routes/delivery.routes"));
 const mesa_routes_1 = __importDefault(require("./routes/mesa.routes"));
 const detallecompra_routes_1 = __importDefault(require("./routes/detallecompra.routes"));
 const factura_routes_1 = __importDefault(require("./routes/factura.routes"));
+const facturasmesa_routes_1 = __importDefault(require("./routes/facturasmesa.routes"));
 const detallefactura_routes_1 = __importDefault(require("./routes/detallefactura.routes"));
 const inventario_routes_1 = __importDefault(require("./routes/inventario.routes"));
 const plato_routes_1 = __importDefault(require("./routes/plato.routes"));
@@ -81,6 +82,7 @@ class App {
         this.app.use('/reporteventas', reporteventas_routes_1.default);
         this.app.use('/reportecomisiones', reportecomisiones_routes_1.default);
         this.app.use('/reporteinventario', reporteinventario_routes_1.default);
+        this.app.use('/facturasmesa', facturasmesa_routes_1.default);
     }
     /*  asyn await se usa para decir que va tomar un tiempo para ejecutar
         luego de eso muestra el mensaje

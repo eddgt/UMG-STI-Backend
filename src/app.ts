@@ -9,6 +9,7 @@ import deliveryRoutes from './routes/delivery.routes';
 import mesaRoutes from './routes/mesa.routes';
 import detalleCompraRoutes from './routes/detallecompra.routes';
 import facturaRoutes from './routes/factura.routes';
+import facturasmesaRoutes from './routes/facturasmesa.routes';
 import detallefacturaRoutes from './routes/detallefactura.routes';
 import inventarioRoutes from './routes/inventario.routes';
 import platoRoutes from './routes/plato.routes';
@@ -78,6 +79,7 @@ export class App {
         this.app.use('/reporteventas', reporteventasRoutes);
         this.app.use('/reportecomisiones', reportecomisionesRoutes);
         this.app.use('/reporteinventario', reporteinventarioRoutes);
+        this.app.use('/facturasmesa', facturasmesaRoutes);
     }
 
 
