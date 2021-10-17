@@ -6,4 +6,5 @@ export interface Factura {
     Usuarios_id?: number;
     date_fact: string;
     tipo_pago_id: string;
+    status: string;
 }
