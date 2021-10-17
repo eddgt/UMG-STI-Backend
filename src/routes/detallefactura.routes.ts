@@ -18,7 +18,7 @@ class DetalleFacturaRoutes {
 
         this.router.post('/', detallefacturaController.createDetalleFactura);
 
-        this.router.get('/:id', detallefacturaController.Obtener)
+        this.router.get('/:id', detallefacturaController.Obtener)        
 
         this.router.delete('/:id', detallefacturaController.Eliminar);
 

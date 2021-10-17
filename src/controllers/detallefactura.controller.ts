@@ -15,7 +15,7 @@ class DetalleFacturaController {
     public async getDetalleFactura(req: Request, res: Response): Promise<Response> {
         const conne = await connect();
 
-        const detallefactura = await conne.query('SELECT a.*, b.descripcion FROM fact_detalle a inner join plato b on a.plato_id = b.id');
+        const detallefactura = await conne.query('SELECT * FROM fact_detalle');
         await conne.end()
         return res.json(detallefactura[0]);
     }
@@ -46,7 +46,7 @@ class DetalleFacturaController {
 
         const conne = await connect();
 
-        const detallefactura = await conne.query('SELECT a.*, b.descripcion FROM fact_detalle a inner join plato b on a.plato_id = b.id WHERE a.factura_id = ?', [id_factura]);
+        const detallefactura = await conne.query('SELECT * FROM fact_detalle WHERE factura_id = ?', [id_factura]);
         await conne.end()
 
         return res.json(detallefactura[0]);
