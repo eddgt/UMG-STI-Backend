@@ -20,7 +20,7 @@ class FacturaController {
     getFactura(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const conne = yield (0, database_1.connect)();
-            const factura = yield conne.query('SELECT * FROM factura');
+            const factura = yield conne.query('SELECT * FROM factura WHERE status="ACTIVA"');
             yield conne.end();
             return res.json(factura[0]);
         });

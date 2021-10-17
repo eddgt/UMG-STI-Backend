@@ -15,7 +15,7 @@ class FacturaController {
     public async getFactura(req: Request, res: Response): Promise<Response> {
         const conne = await connect();
 
-        const factura = await conne.query('SELECT * FROM factura');
+        const factura = await conne.query('SELECT * FROM factura WHERE status="ACTIVA"');
         await conne.end()
         return res.json(factura[0]);
     }
