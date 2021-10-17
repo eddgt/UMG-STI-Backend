@@ -43,15 +43,17 @@ class CajaChicaController {
 
     public async Obtener(req: Request, res: Response): Promise<Response> {
 
-        const id_caja = req.params.id;
+        const fecha = req.params.fecha;
+        const id_usuario = req.params.idusuario;
 
         const conne = await connect();
 
-        const cajachica = await conne.query('SELECT * FROM caja_chica WHERE id = ?', [id_caja]);
+        const cajachica = await conne.query('SELECT * FROM caja_chica WHERE fecha_apertura between DATE_FORMAT(?, \"%Y-%m-%d %H:%00:%s\") and DATE_FORMAT(?, \"%Y-%m-%d 23:59:59\") and Usuarios_id = ? ', [fecha, fecha, id_usuario]);
         await conne.end()
 
         return res.json(cajachica[0]);
     }
+
 
     public async Eliminar(req: Request, res: Response): Promise<Response> {
 

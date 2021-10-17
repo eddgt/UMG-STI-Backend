@@ -18,7 +18,7 @@ class CajaChicaRoutes {
 
         this.router.post('/', cajachicaController.createCajaChica);
 
-        this.router.get('/:id', cajachicaController.Obtener)
+        this.router.get('/:fecha/:idusuario', cajachicaController.Obtener)
 
         this.router.delete('/:id', cajachicaController.Eliminar);
 
