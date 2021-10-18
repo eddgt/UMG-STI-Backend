@@ -20,13 +20,12 @@ class ReporteVentasController {
 
         const conne = await connect();
 
-        const reporte = await conne.query('SELECT DATE_FORMAT(a.date_fact, "%Y-%m-%d") fecha, '+
-        'a.delivery_id canal, c.descripcion producto, sum(b.cantidad) cantidad, round(sum(c.precio),2) total '+
-        'FROM factura a '+
-        'inner join fact_detalle b on a.id = b.factura_id '+
-        'inner join plato c on c.id = b.plato_id '+
-        'where a.date_fact between ? and ? '+
-        ' group by a.date_fact, b.cantidad, c.descripcion, c.precio, a.delivery_id', [inicio, fin]);
+        const reporte = await conne.query('SELECT DATE_FORMAT(f.date_fact, "%Y-%m-%d") fecha, d.empresa_serv canal, '+
+        'sum(fd.cantidad) cantidad, round(sum(fd.precio),2) ctotal  from factura f '+
+        'inner join delivery d on d.id = f.delivery_id '+
+        'inner join fact_detalle fd on fd.factura_id = f.id '+
+        'where f.date_fact between ? and ? '+
+        'group by DATE_FORMAT(f.date_fact, "%Y-%m-%d"),  d.empresa_serv ', [inicio, fin]);
         await conne.end()
 
         // console.log(' ' + inicio + ' ' + fin + ' ' + reporte)
