@@ -80,8 +80,7 @@ class DetalleFacturaController {
 
             const conne = await connect();
 
-            await conne.query('UPDATE fact_datelle set ? WHERE id = ?', [update, id_update])
-            await conne.end()
+            await conne.query('UPDATE fact_detalle set ? WHERE id = ?', [update, id_update])            
 
             return res.json({
                 message: 'DetalleFactura actualizado'
