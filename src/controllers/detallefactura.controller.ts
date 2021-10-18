@@ -46,7 +46,7 @@ class DetalleFacturaController {
 
         const conne = await connect();
 
-        const detallefactura = await conne.query('SELECT * FROM fact_detalle WHERE factura_id = ?', [id_factura]);
+        const detallefactura = await conne.query('SELECT d.*,  p.descripcion FROM fact_detalle d inner join plato p on d.plato_id = p.id WHERE d.factura_id = ?', [id_factura]);
         await conne.end()
 
         return res.json(detallefactura[0]);
