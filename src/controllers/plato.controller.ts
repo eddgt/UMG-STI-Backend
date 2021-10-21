@@ -55,6 +55,30 @@ class PlatoController {
         return res.json(plato[0]);
     }
 
+    public async ObtenerPlatosPorCategoria(req: Request, res: Response): Promise<Response> {
+
+        const categoria = req.params.categoria;
+
+        const conne = await connect();
+
+        const plato = await conne.query('SELECT * FROM plato WHERE categoria = ?', [categoria]);
+        await conne.end()
+
+        return res.json(plato[0]);
+    }
+
+    public async ObtenerPlatosPorRol(req: Request, res: Response): Promise<Response> {
+
+        const id_rol = req.params.rol;
+
+        const conne = await connect();
+
+        const plato = await conne.query('SELECT * FROM plato WHERE id_rol = ?', [id_rol]);
+        await conne.end()
+
+        return res.json(plato[0]);
+    }
+
     public async Eliminar(req: Request, res: Response): Promise<Response> {
 
         try {

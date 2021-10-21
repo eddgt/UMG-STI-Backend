@@ -13,6 +13,8 @@ import facturasmesaRoutes from './routes/facturasmesa.routes';
 import detallefacturaRoutes from './routes/detallefactura.routes';
 import inventarioRoutes from './routes/inventario.routes';
 import platoRoutes from './routes/plato.routes';
+import platorolRoutes from './routes/platorol.routes';
+import platocategoriaRoutes from './routes/platorolcategoria.routes';
 import tipopagoRoutes from './routes/tipopago.routes';
 import usuarioRoutes from './routes/usuario.routes';
 import empleadoRoutes from './routes/empleado.routes';
@@ -70,6 +72,8 @@ export class App {
         this.app.use('/detallefactura', detallefacturaRoutes);
         this.app.use('/inventario', inventarioRoutes);
         this.app.use('/plato', platoRoutes);
+        this.app.use('/platorol', platorolRoutes);
+        this.app.use('/platocategoria', platocategoriaRoutes);
         this.app.use('/tipopago', tipopagoRoutes);
         this.app.use('/usuario', usuarioRoutes);
         this.app.use('/empleado', empleadoRoutes);
