@@ -5,4 +5,6 @@ export interface Inventario {
     cantidad?: number;    
     precio_unit?: number;    
     movimiento?: string;    
+    fecha_movimiento?: string;
+    motivo_ajuste?: string;
 } // Agregar unidad ? 

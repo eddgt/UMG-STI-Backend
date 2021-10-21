@@ -24,6 +24,9 @@ class InventarioController {
         try {
             const newInventario: Inventario = req.body;
 
+            if (newInventario.movimiento === 'SALIDA' || newInventario.movimiento === 'EGRESO') {
+                newInventario.cantidad = newInventario.cantidad * (-1)
+            }
             const conne = await connect();
             const result = await conne.query('INSERT INTO inventario SET ?', [newInventario]);
             await conne.end()
@@ -76,12 +79,12 @@ class InventarioController {
 
     public async Actualizar(req: Request, res: Response): Promise<Response> {
         try {
-            const id_delete = req.params.id;
+            const id_update = req.params.id;
             const update: Inventario = req.body;
 
             const conne = await connect();
 
-            await conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_delete])
+            await conne.query('UPDATE inventario set ? WHERE id = ?', [update, id_update])
             await conne.end()
 
             return res.json({
