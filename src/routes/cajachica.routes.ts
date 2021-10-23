@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import { cajachicaController } from '../controllers/cajachica.controller'
 
-
+// Modificacion 22/10/2021 ahora este es detalle caja chica
 class CajaChicaRoutes {
 
     public router = Router();

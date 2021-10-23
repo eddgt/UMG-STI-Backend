@@ -4,6 +4,7 @@ import { connect } from '../database';
 
 import { CajaChica } from '../interface/cajachica.interface';
 
+// Modificacion 22/10/2021 ahora este es detalle caja chica
 class CajaChicaController {
 
     public cajachica(req: Request, res: Response) {
@@ -29,7 +30,7 @@ class CajaChicaController {
             await conne.end()
 
             return res.json({
-                message: 'Caja Chica creada',
+                message: 'Detalle de Caja Chica creado',
                 id: result[0].insertId
             });
 
@@ -54,6 +55,30 @@ class CajaChicaController {
         return res.json(cajachica[0]);
     }
 
+    public async ObtenerPorFecha(req: Request, res: Response): Promise<Response> {
+
+        const fecha = req.params.fecha;        
+
+        const conne = await connect();
+
+        const cajachica = await conne.query('SELECT * FROM caja_chica WHERE fecha_apertura between DATE_FORMAT(?, \"%Y-%m-%d %H:%00:%s\") and DATE_FORMAT(?, \"%Y-%m-%d 23:59:59\") and Usuarios_id = ? ', [fecha, fecha]);
+        await conne.end()
+
+        return res.json(cajachica[0]);
+    }
+
+
+    public async ObtenerPorId(req: Request, res: Response): Promise<Response> {
+
+        const id = req.params.id;        
+
+        const conne = await connect();
+
+        const cajachica = await conne.query('SELECT * FROM caja_chica WHERE id = ? ', [id]);
+        await conne.end()
+
+        return res.json(cajachica[0]);
+    }
 
     public async Eliminar(req: Request, res: Response): Promise<Response> {
 
@@ -65,7 +90,7 @@ class CajaChicaController {
             await conne.end()
 
             return res.json({
-                message: 'Caja Chija eliminada'
+                message: 'Detalle Caja Chija eliminado'
             })
         } catch (error) {
             return res.json({
@@ -87,7 +112,7 @@ class CajaChicaController {
             await conne.end()
 
             return res.json({
-                message: 'Caja Chica actualizada'
+                message: 'Detalle de Caja Chica actualizado'
             })
         } catch (error) {
             return res.json({
