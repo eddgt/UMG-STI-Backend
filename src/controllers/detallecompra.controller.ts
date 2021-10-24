@@ -26,6 +26,7 @@ class DetalleCompraController {
 
             const conne = await connect();
             await conne.query('INSERT INTO detalle_compra SET ?', [newDetalleCompra]);
+            await conne.end()
 
             return res.json({
                 message: 'Detalle Compra creado'
@@ -45,6 +46,7 @@ class DetalleCompraController {
         const conne = await connect();
 
         const detallecompra = await conne.query('SELECT * FROM detalle_compra WHERE id = ?', [id_compra]);
+        await conne.end()
 
         return res.json(detallecompra[0]);
     }
@@ -56,6 +58,7 @@ class DetalleCompraController {
             const conne = await connect();
 
             await conne.query('DELETE FROM detalle_compra WHERE id = ? ', [id_delete]);
+            await conne.end()
 
             return res.json({
                 message: 'Detalle Compra eliminada'

@@ -17,6 +17,8 @@ class DeliveryController {
             const conne = await connect();
 
             const delivery = await conne.query('SELECT * FROM delivery');
+            await conne.end()
+            
             return res.json(delivery[0]);
         } catch (error) {
             return res.json({
@@ -32,6 +34,7 @@ class DeliveryController {
 
             const conne = await connect();
             await conne.query('INSERT INTO delivery SET ?', [newDelivery]);
+            await conne.end()
 
             return res.json({
                 message: 'Delivery creado'

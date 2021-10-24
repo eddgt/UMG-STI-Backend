@@ -16,6 +16,8 @@ class EmpleadoController {
         const conne = await connect();
 
         const empleado = await conne.query('SELECT * FROM employees');
+        await conne.end()
+        
         return res.json(empleado[0]);
     }
 

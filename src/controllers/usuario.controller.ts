@@ -16,6 +16,7 @@ class UsuarioController {
         const conne = await connect();
 
         const usuario = await conne.query('SELECT id, usuario, email, rol, nombre, date_create FROM Usuarios');
+        await conne.end()
         return res.json(usuario[0]);
     }
 
