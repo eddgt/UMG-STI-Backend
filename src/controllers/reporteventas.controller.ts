@@ -36,13 +36,16 @@ class ReporteVentasController {
 
     public async getReporteByFacturaId(req: Request, res: Response): Promise<Response> {
 
-        const id_factura = req.params.id;
+        const id_factura = parseInt(req.params.id);
 
         const conne = await connect();
 
-        const reporte = await conne.query('select @i := @i + 1 as item_no, d.factura_id, m.referencem mesa, '+
-        'p.descripcion, d.cantidad, d.precio from fact_detalle d '+
+        const reporte = await conne.query('select @i := @i + 1 as item_no, d.factura_id, p.descripcion, dl.empresa_serv medio, '+
+        'case dl.empresa_serv  when \'MESA\' THEN m.referencem else \'\' end as mesa, '+
+        'd.cantidad, d.precio '+
+        'from fact_detalle d '+
         'inner join factura f on f.id = d.factura_id '+
+        'inner join delivery dl on dl.id = f.delivery_id '+
         'inner join mesa m on m.id = f.mesa_id '+
         'inner join plato p on p.id = d.plato_id '+
         'cross join (select @i := 0) d '+

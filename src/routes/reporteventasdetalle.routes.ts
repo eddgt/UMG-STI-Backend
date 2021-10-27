@@ -14,13 +14,13 @@ class ReporteVentasRoutes {
 
     config(): void {
 
-        this.router.post('/', reporteventasController.getReportePorFecha);        
+        this.router.get('/:id', reporteventasController.getReporteByFacturaId);
 
     }
 
 
 }
 
-const reporteventasRoutes = new ReporteVentasRoutes();
+const reporteventasdetalleRoutes = new ReporteVentasRoutes();
 
-export default reporteventasRoutes.router;
+export default reporteventasdetalleRoutes.router;

@@ -21,6 +21,7 @@ import empleadoRoutes from './routes/empleado.routes';
 import loginRoutes from './routes/login.routes';
 import passwordRoutes from './routes/password.routes';
 import reporteventasRoutes from './routes/reporteventas.routes';
+import reporteventasdetalleRoutes from './routes/reporteventasdetalle.routes';
 import reportecomisionesRoutes from './routes/reportecomisiones.routes';
 import reporteinventarioRoutes from './routes/reporteinventario.routes';
 import cajachicaRoutes from './routes/cajachica.routes';
@@ -83,6 +84,7 @@ export class App {
         this.app.use('/detallecajachica', cajachicaRoutes);
         this.app.use('/headercajachica', headercajachicaRoutes);
         this.app.use('/reporteventas', reporteventasRoutes);
+        this.app.use('/reporteventasdetalle', reporteventasdetalleRoutes);
         this.app.use('/reportecomisiones', reportecomisionesRoutes);
         this.app.use('/reporteinventario', reporteinventarioRoutes);
         this.app.use('/facturasmesa', facturasmesaRoutes);
