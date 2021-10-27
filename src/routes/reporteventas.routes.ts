@@ -16,6 +16,8 @@ class ReporteVentasRoutes {
 
         this.router.post('/', reporteventasController.getReportePorFecha);
 
+        this.router.get('/:id', reporteventasController.getReporteByFacturaId);
+
     }
 
 
