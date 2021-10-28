@@ -48,7 +48,9 @@ class HeaderCajaChicaController {
 
         const conne = await connect();
 
-        const cajachica = await conne.query('SELECT * FROM header_caja_chica WHERE fecha between DATE_FORMAT(?, \"%Y-%m-%d %H:%00:%s\") and DATE_FORMAT(?, \"%Y-%m-%d 23:59:59\") = ? ', [fecha, fecha, id_usuario]);
+        const cajachica = await conne.query('SELECT * FROM header_caja_chica ' +
+        'WHERE fecha between DATE_FORMAT(?, "%Y-%m-%d %H:%00:%s") '+
+        'and DATE_FORMAT(?, "%Y-%m-%d 23:59:59") and usuario_id = ? order by fecha desc limit 1 ', [fecha, fecha, id_usuario]);
         await conne.end()
 
         return res.json(cajachica[0]);
