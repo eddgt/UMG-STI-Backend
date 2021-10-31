@@ -80,6 +80,21 @@ class CajaChicaController {
         return res.json(cajachica[0]);
     }
 
+    public async ObtenerCajaDelDiaPorUsuario(req: Request, res: Response): Promise<Response> {
+
+        const id_usuario = req.params.idusuario;
+
+        const conne = await connect();
+
+        const cajachica = await conne.query('select count(1) as cajacreada from header_caja_chica '+
+        'where fecha between DATE_FORMAT(subtime(sysdate(), "06:00:00" ), "%Y-%m-%d %00:%00:%00") '+
+        'and DATE_FORMAT(subtime(sysdate(), "06:00:00" ), "%Y-%m-%d 23:59:59") '+
+        'and usuario_id = ? ', [id_usuario]);
+        await conne.end()
+
+        return res.json(cajachica[0]);
+    }
+
     public async Eliminar(req: Request, res: Response): Promise<Response> {
 
         try {

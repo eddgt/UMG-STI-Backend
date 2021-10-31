@@ -26,10 +26,10 @@ class ReporteInventarioController {
         await conne.end() */
 
         const reporte = await conne.query('select i.plato_id codigo, i.producto descripcion, ' +
-            'p.categoria, sum(i.cantidad) saldo ' +
-            'from inventario i ' +
+            'p.categoria, SUM(i.cantidad) saldo ' +
+            'FROM inventario i ' +
             'inner join plato p on p.id = i.plato_id ' +
-            'and p.categoria not like "PLATO" ' +
+            'and p.categoria NOT IN("PLATO") ' +
             'GROUP BY i.plato_id, i.producto, p.categoria ');
         await conne.end()
 

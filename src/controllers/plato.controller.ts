@@ -15,7 +15,14 @@ class PlatoController {
     public async getPlato(req: Request, res: Response): Promise<Response> {
         const conne = await connect();
 
-        const plato = await conne.query('SELECT * FROM plato');
+        const plato = await conne.query('SELECT p.id, p.receta_id, p.descripcion, sum(i.cantidad) cantidad, p.costo, p.margen, p.precio, '+
+        'p.categoria, p.id_rol, p.fecha_ven, p.estado FROM plato p '+
+        'INNER JOIN inventario i on i.plato_id = p.id '+
+        'where p.categoria not in("PLATO") '+
+        'GROUP BY p.id '+
+        'UNION ALL '+
+        'SELECT id, receta_id, descripcion, cantidad, costo, margen, precio, '+
+        'categoria, id_rol, fecha_ven, estado FROM plato where categoria in("PLATO") ');
         await conne.end()
 
         return res.json(plato[0]);
@@ -49,7 +56,7 @@ class PlatoController {
 
         const conne = await connect();
 
-        const plato = await conne.query('SELECT * FROM plato WHERE id = ?', [id_plato]);
+        const plato = await conne.query('SELECT * FROM plato WHERE id = ? AND estado="ACTIVO" ', [id_plato]);
         await conne.end()
 
         return res.json(plato[0]);
@@ -61,7 +68,7 @@ class PlatoController {
 
         const conne = await connect();
 
-        const plato = await conne.query('SELECT * FROM plato WHERE categoria = ?', [categoria]);
+        const plato = await conne.query('SELECT * FROM plato WHERE categoria = ? and estado="ACTIVO" ', [categoria]);
         await conne.end()
 
         return res.json(plato[0]);
@@ -73,7 +80,7 @@ class PlatoController {
 
         const conne = await connect();
 
-        const plato = await conne.query('SELECT * FROM plato WHERE id_rol = ?', [id_rol]);
+        const plato = await conne.query('SELECT * FROM plato WHERE id_rol = ? and estado ="ACTIVO" ', [id_rol]);
         await conne.end()
 
         return res.json(plato[0]);
@@ -85,7 +92,7 @@ class PlatoController {
             const id_delete = req.params.id;
             const conne = await connect();
 
-            await conne.query('DELETE FROM plato WHERE id = ? ', [id_delete]);
+            await conne.query('UPDATE plato SET estado = "INACTIVO" WHERE id = ? ', [id_delete]);
             await conne.end()
 
             return res.json({

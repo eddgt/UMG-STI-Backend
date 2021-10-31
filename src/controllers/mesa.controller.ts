@@ -15,7 +15,7 @@ class MesaController {
     public async getMesa(req: Request, res: Response): Promise<Response> {
         const conne = await connect();
 
-        const mesa = await conne.query('SELECT * FROM mesa');
+        const mesa = await conne.query('SELECT * FROM mesa where estado="ACTIVA" ');
         await conne.end()
 
         return res.json(mesa[0]);
@@ -49,7 +49,7 @@ class MesaController {
 
         const conne = await connect();
 
-        const mesa = await conne.query('SELECT * FROM mesa WHERE id = ?', [id_mesa]);
+        const mesa = await conne.query('SELECT * FROM mesa WHERE id = ? AND estado = "ACTIVA" ', [id_mesa]);
         await conne.end()
 
         return res.json(mesa[0]);
@@ -61,7 +61,7 @@ class MesaController {
             const id_delete = req.params.id;
             const conne = await connect();
 
-            await conne.query('DELETE FROM mesa WHERE id = ? ', [id_delete]);
+            await conne.query('UPDATE mesa set estado = "INACTIVA" where id = ?', [id_delete]);
             await conne.end()
 
             return res.json({
@@ -88,6 +88,46 @@ class MesaController {
 
             return res.json({
                 message: 'Mesa actualizada'
+            })
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
+
+    }
+
+    public async BajaMesa(req: Request, res: Response): Promise<Response> {
+        try {
+            const id_update = req.params.id;            
+
+            const conne = await connect();
+
+            await conne.query('UPDATE mesa set estado = "INACTIVA" where id = ?', [id_update])
+            await conne.end()
+
+            return res.json({
+                message: 'Mesa dada de Baja'
+            })
+        } catch (error) {
+            return res.json({
+                message: error
+            });
+        }
+
+    }
+
+    public async ActivarMesa(req: Request, res: Response): Promise<Response> {
+        try {
+            const id_update = req.params.id;            
+
+            const conne = await connect();
+
+            await conne.query('UPDATE mesa set estado = "ACTIVA" where id = ?', [id_update])
+            await conne.end()
+
+            return res.json({
+                message: 'Mesa dada de Alta'
             })
         } catch (error) {
             return res.json({

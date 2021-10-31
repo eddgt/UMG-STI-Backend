@@ -25,6 +25,7 @@ import reporteventasdetalleRoutes from './routes/reporteventasdetalle.routes';
 import reportecomisionesRoutes from './routes/reportecomisiones.routes';
 import reporteinventarioRoutes from './routes/reporteinventario.routes';
 import cajachicaRoutes from './routes/cajachica.routes';
+import cajausuarioRoutes from './routes/cajausuario.routes';
 import totalmesaRoutes from './routes/totalmesa.routes';
 import headercajachicaRoutes from './routes/headercajachica.routes';
 
@@ -64,6 +65,7 @@ export class App {
 
     routes(): void {
         this.app.use('/', indexRoutes);
+        this.app.use('/cajausuario', cajausuarioRoutes);
         this.app.use('/cliente', clienteRoutes);
         this.app.use('/compra', compraRoutes);
         this.app.use('/detallecompra', detalleCompraRoutes);
