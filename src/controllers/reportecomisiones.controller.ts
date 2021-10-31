@@ -24,7 +24,7 @@ class ReporteComisionesController {
         'round(sum(c.costo_delivery),2) total ' +
         'FROM factura a INNER JOIN fact_detalle b on a.id = b.factura_id ' +
         'INNER JOIN delivery c on c.id = a.delivery_id ' +
-        'WHERE a.date_fact between DATE_FORMAT(?, \"%Y-%m-%d %H:%00:%s\") and DATE_FORMAT(?, \"%Y-%m-%d 23:59:59\") ' +
+        'WHERE a.date_fact between DATE_FORMAT(?, \"%Y-%m-%d %00:%00:%00\") and DATE_FORMAT(?, \"%Y-%m-%d 23:59:59\") ' +
         'AND c.empresa_serv not in("MESA") ' +
         'group by c.empresa_serv', [inicio, fin]);
         await conne.end()
