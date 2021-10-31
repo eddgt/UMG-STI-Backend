@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { json, Request, Response } from 'express';
 
 import { connect } from '../database';
 
@@ -35,7 +35,14 @@ class PlatoController {
 
             const conne = await connect();
             const result = await conne.query('INSERT INTO plato SET ?', [newPlato]);
+            console.log("Creando Plato: " + JSON.stringify(newPlato));
+            const conn2 = await connect();
+            const result2 = await conn2.query('INSERT INTO inventario (plato_id, producto, cantidad, precio_unit, movimiento, motivo_ajuste, fecha_movimiento) ' +
+            ' values(?, ?, ?, ?, ?, ?, SYSDATE()) ', [result[0].insertId, newPlato.descripcion, 0, 0, 'CREACION INICIAL','CREACION INICIAL']);
+            console.log("Creando Inventario: " + result[0].insertId);
+            console.log("Result 2: " + result2);
             await conne.end()
+            await conn2.end()
 
             return res.json({
                 message: 'Plato creado',
