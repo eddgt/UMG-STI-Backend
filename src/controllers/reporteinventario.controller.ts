@@ -29,7 +29,7 @@ class ReporteInventarioController {
             'p.categoria, SUM(i.cantidad) saldo ' +
             'FROM inventario i ' +
             'inner join plato p on p.id = i.plato_id ' +
-            'and p.categoria NOT IN("PLATO") ' +
+            'and p.categoria NOT IN("PLATO") and p.estado ="ACTIVO" ' +
             'GROUP BY i.plato_id, i.producto, p.categoria ');
         await conne.end()
 
