@@ -18,11 +18,11 @@ class PlatoController {
         const plato = await conne.query('SELECT p.id, p.receta_id, p.descripcion, sum(i.cantidad) cantidad, p.costo, p.margen, p.precio, '+
         'p.categoria, p.id_rol, p.fecha_ven, p.estado FROM plato p '+
         'INNER JOIN inventario i on i.plato_id = p.id '+
-        'where p.categoria not in("PLATO") '+
+        'where p.categoria not in("PLATO") and p.estado ="ACTIVO" '+
         'GROUP BY p.id '+
         'UNION ALL '+
         'SELECT id, receta_id, descripcion, cantidad, costo, margen, precio, '+
-        'categoria, id_rol, fecha_ven, estado FROM plato where categoria in("PLATO") ');
+        'categoria, id_rol, fecha_ven, estado FROM plato where categoria in("PLATO") and estado ="ACTIVO" ');
         await conne.end()
 
         return res.json(plato[0]);
